@@ -1,4 +1,4 @@
-package com.example.francis.lelab4;
+package info.dicj.lelab4;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

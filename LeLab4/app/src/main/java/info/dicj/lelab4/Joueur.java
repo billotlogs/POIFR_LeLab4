@@ -1,5 +1,8 @@
 package info.dicj.lelab4;
 
+import android.view.View;
+import android.widget.TextView;
+
 /**
  * Created by utilisateur on 30/01/2017.
  */
@@ -11,8 +14,9 @@ public class Joueur {
 
     }
 
-    public void Manger(){
-
+    public void Manger(Nourriture bouffe){
+        argent -= bouffe.prix;
+        faim += bouffe.alimentation;
     }
 
     public void Dormir(){

@@ -29,7 +29,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/argent"/>
+            android:text="@string/argent"
+            android:id="@+id/txtArgent"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sante"/>
+            android:text="@string/sante"
+            android:id="@+id/txtSante"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -55,7 +57,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/energie"/>
+            android:text="@string/energie"
+            android:id="@+id/txtEnergie"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -68,7 +71,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/faim" />
+            android:text="@string/faim"
+            android:id="@+id/txtFaim"/>
     </GridLayout>
 
     <View
@@ -97,7 +101,33 @@
                 android:layout_height="60dip"
                 android:background="@drawable/mangertitre"
                 android:id="@+id/manger"
-                android:layout_marginBottom="2dip"/>
+                android:layout_marginBottom="2dip"
+                android:onClick="Action"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:id="@+id/menuManger"
+                android:background="#FFFF">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dip"
+                    android:background="@drawable/style_bouton"
+                    android:text="Ramen 10$   +10 Faim"
+                    android:id="@+id/ramen"
+                    android:onClick="ChoixNourriture"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dip"
+                    android:background="@drawable/style_bouton"
+                    android:onClick="ChoixNourriture"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dip"
+                    android:background="@drawable/style_bouton"
+                    android:onClick="ChoixNourriture"/>
+            </TableLayout>
 
             <ImageButton
                 android:src="@drawable/travailler"
@@ -106,7 +136,8 @@
                 android:layout_height="60dip"
                 android:background="@drawable/travaillertitre"
                 android:id="@+id/travailler"
-                android:layout_marginBottom="2dip"/>
+                android:layout_marginBottom="2dip"
+                android:onClick="Action"/>
 
             <ImageButton
                 android:src="@drawable/dormir"
@@ -116,7 +147,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/dormirtitre"
                 android:id="@+id/dormir"
-                android:layout_marginBottom="2dip"/>
+                android:layout_marginBottom="2dip"
+                android:onClick="Action"/>
 
             <ImageButton
                 android:src="@drawable/attendre"
@@ -126,7 +158,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/attendretitre"
                 android:id="@+id/attendre"
-                android:layout_marginBottom="2dip"/>
+                android:layout_marginBottom="2dip"
+                android:onClick="Action"/>
 
             <ImageButton
                 android:src="@drawable/devoir"
@@ -136,7 +169,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/devoirstitre"
                 android:id="@+id/devoir"
-                android:layout_marginBottom="2dip"/>
+                android:layout_marginBottom="2dip"
+                android:onClick="Action"/>
 
             <ImageButton
                 android:src="@drawable/argent"

@@ -8,7 +8,21 @@ public class Nourriture {
     int alimentation;
     double prix;
 
-    public Nourriture(){
+    public Nourriture(String nom, int alimentation, double prix){
+        this.nom = nom;
+        this.alimentation = alimentation;
+        this.prix = prix;
+    }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public int getAlimentation() {
+        return alimentation;
+    }
+
+    public double getPrix() {
+        return prix;
     }
 }

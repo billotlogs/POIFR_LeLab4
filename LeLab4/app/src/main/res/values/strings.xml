@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LeLab4</string>
+    <string name="argent">Argent</string>
+    <string name="sante">Santé</string>
+    <string name="energie">Énergie</string>
+    <string name="faim">Faim</string>
 </resources>

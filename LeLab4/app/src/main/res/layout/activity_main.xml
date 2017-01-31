@@ -7,10 +7,173 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFF"
     tools:context="info.dicj.lelab4.MainActivity">
 
-    <TextView
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:rowCount="5"
+        android:columnCount="2"
+        android:id="@+id/stats"
+        android:layout_marginStart="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/argent"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/argent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sante"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sante"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/energie"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/energie"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/faim"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/faim" />
+    </GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dip"
+        android:background="#000"
+        android:layout_alignBottom="@id/stats"
+        android:id="@+id/ligne"
+        android:layout_marginBottom="10dip"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ligne"
+        android:weightSum="2"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:id="@+id/actionBar1">
+
+        <ImageButton
+            android:src="@drawable/manger"
+            android:scaleType="fitCenter"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton" />
+
+        <ImageButton
+            android:src="@drawable/travailler"
+            android:scaleType="fitCenter"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionBar1"
+        android:id="@+id/actionBar2"
+        android:weightSum="2"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip">
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionBar2"
+        android:id="@+id/actionBar3"
+        android:weightSum="2"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip">
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionBar3"
+        android:id="@+id/actionBar4"
+        android:weightSum="2"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip">
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+
+        <ImageButton
+            android:src="@drawable/argent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_bouton"/>
+    </LinearLayout>
 </RelativeLayout>

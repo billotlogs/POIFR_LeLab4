@@ -79,101 +79,85 @@
         android:id="@+id/ligne"
         android:layout_marginBottom="10dip"/>
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ligne"
-        android:weightSum="2"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:id="@+id/actionBar1">
-
-        <ImageButton
-            android:src="@drawable/manger"
-            android:scaleType="fitCenter"
-            android:layout_width="match_parent"
-            android:layout_height="60dip"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton" />
-
-        <ImageButton
-            android:src="@drawable/travailler"
-            android:scaleType="fitCenter"
-            android:layout_width="match_parent"
-            android:layout_height="60dip"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/actionBar1"
-        android:id="@+id/actionBar2"
-        android:weightSum="2"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip">
 
-        <ImageButton
-            android:src="@drawable/argent"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
+            android:layout_height="wrap_content">
 
-        <ImageButton
-            android:src="@drawable/argent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
-    </LinearLayout>
+            <ImageButton
+                android:src="@drawable/manger"
+                android:scaleType="fitEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:background="@drawable/mangertitre"
+                android:id="@+id/manger"
+                android:layout_marginBottom="2dip"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/actionBar2"
-        android:id="@+id/actionBar3"
-        android:weightSum="2"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip">
+            <ImageButton
+                android:src="@drawable/travailler"
+                android:scaleType="fitEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:background="@drawable/travaillertitre"
+                android:id="@+id/travailler"
+                android:layout_marginBottom="2dip"/>
 
-        <ImageButton
-            android:src="@drawable/argent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
+            <ImageButton
+                android:src="@drawable/dormir"
+                android:scaleType="fitEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_weight="1"
+                android:background="@drawable/dormirtitre"
+                android:id="@+id/dormir"
+                android:layout_marginBottom="2dip"/>
 
-        <ImageButton
-            android:src="@drawable/argent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
-    </LinearLayout>
+            <ImageButton
+                android:src="@drawable/attendre"
+                android:scaleType="fitEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_weight="1"
+                android:background="@drawable/attendretitre"
+                android:id="@+id/attendre"
+                android:layout_marginBottom="2dip"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/actionBar3"
-        android:id="@+id/actionBar4"
-        android:weightSum="2"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip">
+            <ImageButton
+                android:src="@drawable/devoir"
+                android:scaleType="fitEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_weight="1"
+                android:background="@drawable/devoirstitre"
+                android:id="@+id/devoir"
+                android:layout_marginBottom="2dip"/>
 
-        <ImageButton
-            android:src="@drawable/argent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
+            <ImageButton
+                android:src="@drawable/argent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/style_bouton"/>
 
-        <ImageButton
-            android:src="@drawable/argent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/style_bouton"/>
-    </LinearLayout>
+            <ImageButton
+                android:src="@drawable/argent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/style_bouton"/>
+
+            <ImageButton
+                android:src="@drawable/argent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/style_bouton"/>
+        </TableLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

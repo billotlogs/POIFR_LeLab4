@@ -5,19 +5,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     Joueur joueur = new Joueur();
+    ArrayList<Nourriture> nourritures;
     Nourriture ramen = new Nourriture("Ramen", 10, 1.49);
     boolean etat = false;
     TextView txtFaim, txtArgent;
+    ListView choixNourriture;
+    BouffeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        nourritures = new ArrayList<Nourriture>();
+        nourritures.add(ramen);
+
+        choixNourriture = (ListView)findViewById(R.id.menuManger);
+        adapter = new BouffeAdapter(this, nourritures);
+        choixNourriture.setAdapter(adapter);
+
         txtFaim = (TextView)findViewById(R.id.txtFaim);
         txtArgent = (TextView)findViewById(R.id.txtArgent);
     }
@@ -46,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ChoixNourriture(View view){
         switch(view.getId()){
-            case R.id.ramen : joueur.Manger(ramen);
+            //case R.id.ramen : joueur.Manger(ramen);
         }
         txtFaim.setText("" + joueur.faim);
         txtArgent.setText("" + joueur.argent);

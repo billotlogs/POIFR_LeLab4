@@ -104,30 +104,12 @@
                 android:layout_marginBottom="2dip"
                 android:onClick="Action"/>
 
-            <TableLayout
-                android:layout_width="match_parent"
+            <ListView
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:layout_width="match_parent"
                 android:id="@+id/menuManger"
-                android:background="#FFFF">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dip"
-                    android:background="@drawable/style_bouton"
-                    android:text="Ramen 10$   +10 Faim"
-                    android:id="@+id/ramen"
-                    android:onClick="ChoixNourriture"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dip"
-                    android:background="@drawable/style_bouton"
-                    android:onClick="ChoixNourriture"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dip"
-                    android:background="@drawable/style_bouton"
-                    android:onClick="ChoixNourriture"/>
-            </TableLayout>
+                android:visibility="gone">
+            </ListView>
 
             <ImageButton
                 android:src="@drawable/travailler"

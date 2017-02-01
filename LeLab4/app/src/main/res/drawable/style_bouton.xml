@@ -5,10 +5,8 @@
         android:shape="rectangle">
         <gradient
             android:startColor="#0098ff"
-            android:endColor="#00c0ff"/>
-        <stroke
-            android:color="#FFFF"
-            android:width="1dip"/>
+            android:endColor="#00afff" />
     </shape>
+    <bitmap android:src="@drawable/argent" />
 </item>
 </selector>

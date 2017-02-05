@@ -7,6 +7,5 @@
             android:startColor="#0098ff"
             android:endColor="#00afff" />
     </shape>
-    <bitmap android:src="@drawable/argent" />
 </item>
 </selector>

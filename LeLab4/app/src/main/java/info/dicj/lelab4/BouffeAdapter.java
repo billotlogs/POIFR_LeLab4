@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Francis on 2017-01-31.
+ * Références
+ * http://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
  */
 
 public class BouffeAdapter extends ArrayAdapter<Nourriture>{
@@ -23,7 +25,6 @@ public class BouffeAdapter extends ArrayAdapter<Nourriture>{
         this.context = context;
         this.donnee = donnee;
     }
-
 
     private static class ViewHolder {
         TextView txtNom;
@@ -48,11 +49,11 @@ public class BouffeAdapter extends ArrayAdapter<Nourriture>{
             viewHolder.txtNom = (TextView) convertView.findViewById(R.id.nom_nourriture);
             viewHolder.txtPrix = (TextView) convertView.findViewById(R.id.prix_nourriture);
 
-            result=convertView;
+            result = convertView;
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+            result = convertView;
         }
 
         viewHolder.txtNom.setText(donnee.getNom());

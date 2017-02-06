@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
-    Joueur joueur = new Joueur();
+    Joueur joueur = new Joueur(100, 100, 100, 0, 200);
 
     ListView lvNourriture;
     BouffeAdapter adapter;
@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity{
     Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
 
     boolean etat = false;
-    TextView txtFaim, txtArgent;
+    int nbHeure = 0;
+    TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +49,31 @@ public class MainActivity extends AppCompatActivity{
 
         txtFaim = (TextView)findViewById(R.id.txtFaim);
         txtArgent = (TextView)findViewById(R.id.txtArgent);
+        txtEnergie = (TextView)findViewById(R.id.txtEnergie);
+        txtSante = (TextView)findViewById(R.id.txtSante);
+        txtNbHeure = (TextView)findViewById(R.id.nbHeure);
+
+        txtFaim.setText("" + joueur.faim);
+        txtArgent.setText("" + joueur.argent);
+        txtEnergie.setText("" + joueur.energie);
+        txtSante.setText("" + joueur.santeMentale);
     }
 
     //Effectue une action lors d'un click sur un bouton.
     public void Action(View view) {
-        String text = "";
         View menuManger = findViewById(R.id.menuManger);
         //View menuDevoir = findViewById(R.id.devoir);
         switch(view.getId()){
             case R.id.manger:
-                text = "manger";
                 OuvreFerme(menuManger);
                 break;
             case R.id.travailler:
-                text = "travailler";
                 break;
             case R.id.dormir:
-                text = "dormir";
                 break;
             case R.id.attendre:
-                text = "attendre";
                 break;
             case R.id.devoir:
-                text = "devoir";
                 //OuvreFerme(menuDevoir);
                 break;
         }
@@ -86,6 +89,20 @@ public class MainActivity extends AppCompatActivity{
             etat = false;
             menu.setVisibility(menu.GONE);
         }
+    }
+
+    public void HeureTravail(View view){
+
+
+        switch (view.getId()){
+            case R.id.increase:
+                nbHeure++;
+                break;
+            case R.id.decrease:
+                nbHeure--;
+                break;
+        }
+        txtNbHeure.setText("" + nbHeure);
     }
 
     //Action lors d'un click sur un élément d'une listview.

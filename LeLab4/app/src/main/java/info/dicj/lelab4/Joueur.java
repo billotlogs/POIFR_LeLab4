@@ -10,17 +10,23 @@ public class Joueur {
     int energie, santeMentale, faim, connaissance;
     double argent;
 
-    public Joueur(){
-
+    public Joueur(int energie, int santeMentale, int faim, int connaissance, double argent){
+        this.energie = energie;
+        this.santeMentale = santeMentale;
+        this.faim = faim;
+        this.connaissance = connaissance;
+        this.argent = argent;
     }
 
     public void Manger(Nourriture bouffe){
-        argent -= bouffe.prix;
-        faim += bouffe.alimentation;
+        if((argent >= bouffe.prix) && (faim < 100)){
+            argent -= bouffe.prix;
+            faim += bouffe.alimentation;
+        }
     }
 
     public void Dormir(){
-
+        energie = 100;
     }
 
     public void FaireDevoir(){
@@ -31,8 +37,9 @@ public class Joueur {
 
     }
 
-    public void Travailler(){
-
+    public void Travailler(int heure){
+        energie -= 10 * heure;
+        argent += 11.25 * heure;
     }
 
     public void Vivre(){

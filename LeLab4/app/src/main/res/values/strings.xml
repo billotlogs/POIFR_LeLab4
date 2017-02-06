@@ -4,4 +4,5 @@
     <string name="sante">Santé</string>
     <string name="energie">Énergie</string>
     <string name="faim">Faim</string>
+    <string name="heure">0</string>
 </resources>

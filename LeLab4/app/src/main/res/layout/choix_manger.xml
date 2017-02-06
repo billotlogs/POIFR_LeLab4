@@ -6,7 +6,7 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="60dip"
-        android:background="@drawable/style_bouton"
+        android:background="@drawable/texture2"
         android:columnCount="2"
         android:layout_marginBottom="2dip">
 

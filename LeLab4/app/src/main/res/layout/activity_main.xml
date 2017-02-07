@@ -92,7 +92,8 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/menuPrincipal">
 
             <ImageButton
                 android:src="@drawable/manger"
@@ -174,14 +175,18 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:id="@+id/menuHeure"
+        android:visibility="gone"
+        android:clickable="true">
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:rowCount="3"
             android:columnCount="2"
-            android:background="#c8000000">
+            android:background="#c8000000"
+            android:padding="10dip">
 
             <ImageButton
                 android:layout_width="60dip"
@@ -192,7 +197,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:onClick="HeureTravail"
-                android:id="@+id/increase"/>
+                android:id="@+id/increase" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -204,6 +209,16 @@
                 android:layout_column="0"
                 android:id="@+id/nbHeure"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/heures"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textColor="#FFF"/>
+
             <ImageButton
                 android:layout_width="60dip"
                 android:layout_height="60dip"
@@ -214,6 +229,18 @@
                 android:layout_column="0"
                 android:onClick="HeureTravail"
                 android:id="@+id/decrease"/>
+
+            <ImageButton
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:src="@drawable/valider"
+                android:background="@drawable/style_bouton"
+                android:scaleType="fitCenter"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_gravity="end"
+                android:onClick="HeureTravail"
+                android:id="@+id/valider"/>
         </GridLayout>
     </FrameLayout>
 </RelativeLayout>

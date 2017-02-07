@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.627417"
-     inkscape:cx="222.82304"
-     inkscape:cy="518.19958"
+     inkscape:cx="248.47485"
+     inkscape:cy="507.16871"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1009,6 +1009,21 @@
        id="rect4292-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc"
+       inkscape:export-xdpi="1138"
+       inkscape:export-ydpi="1138" />
+    <rect
+       style="opacity:1;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4294"
+       width="10"
+       height="10"
+       x="250"
+       y="542.36218"
+       ry="1.0000221" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.02239454px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 251.37827,547.91232 2.38771,2.62668 4.77541,-7.00449"
+       id="path4296"
+       inkscape:connector-curvature="0"
        inkscape:export-xdpi="1138"
        inkscape:export-ydpi="1138" />
   </g>

@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity{
     Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
     Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
 
-    boolean etat = false;
     int nbHeure = 0;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
 
@@ -61,15 +60,20 @@ public class MainActivity extends AppCompatActivity{
 
     //Effectue une action lors d'un click sur un bouton.
     public void Action(View view) {
+        View menuPrincipal = findViewById(R.id.menuPrincipal);
         View menuManger = findViewById(R.id.menuManger);
+        View menuHeure = findViewById(R.id.menuHeure);
         //View menuDevoir = findViewById(R.id.devoir);
         switch(view.getId()){
             case R.id.manger:
                 OuvreFerme(menuManger);
                 break;
             case R.id.travailler:
+                OuvreFerme(menuHeure);
                 break;
             case R.id.dormir:
+                joueur.Dormir();
+                UpdateText();
                 break;
             case R.id.attendre:
                 break;
@@ -81,25 +85,26 @@ public class MainActivity extends AppCompatActivity{
 
     //Ouvre ou ferme un menu d'actions
     private void OuvreFerme(View menu){
-        if(!etat){
-            etat = true;
+        if(menu.getVisibility() == menu.GONE){
             menu.setVisibility(menu.VISIBLE);
         }
         else{
-            etat = false;
             menu.setVisibility(menu.GONE);
         }
     }
 
+    //Permet de choisir le nombre d'heures travaillées.
     public void HeureTravail(View view){
-
-
         switch (view.getId()){
             case R.id.increase:
                 nbHeure++;
                 break;
             case R.id.decrease:
                 nbHeure--;
+                break;
+            case R.id.valider:
+                joueur.Travailler(nbHeure);
+                UpdateText();
                 break;
         }
         txtNbHeure.setText("" + nbHeure);
@@ -112,11 +117,17 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 joueur.Manger(listNourriture.get(i));
-                txtArgent.setText("" + joueur.argent);
-                txtFaim.setText("" + joueur.faim);
-                Log.i("Test", "Nom : " + listNourriture.get(i).getNom());
+                UpdateText();
             }
         });
+    }
+
+    //Met à jour les textes.
+    private void UpdateText(){
+        txtFaim.setText("" + joueur.faim);
+        txtArgent.setText("" + joueur.argent);
+        txtEnergie.setText("" + joueur.energie);
+        txtSante.setText("" + joueur.santeMentale);
     }
 
     //Permet au sous menus d'être scrollable.

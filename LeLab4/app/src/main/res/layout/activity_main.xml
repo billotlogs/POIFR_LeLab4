@@ -134,13 +134,9 @@
 
             <ImageButton
                 android:src="@drawable/manger"
-                android:scaleType="fitEnd"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
                 android:background="@drawable/mangertitre"
                 android:id="@+id/manger"
-                android:layout_marginBottom="2dip"
-                android:onClick="Action"/>
+                style="@style/BoutonListe"/>
 
             <ListView
                 android:layout_height="188dip"
@@ -151,43 +147,27 @@
 
             <ImageButton
                 android:src="@drawable/travailler"
-                android:scaleType="fitEnd"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
                 android:background="@drawable/travaillertitre"
                 android:id="@+id/travailler"
-                android:layout_marginBottom="2dip"
-                android:onClick="Action"/>
+                style="@style/BoutonListe"/>
 
             <ImageButton
                 android:src="@drawable/dormir"
-                android:scaleType="fitEnd"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
                 android:background="@drawable/dormirtitre"
                 android:id="@+id/dormir"
-                android:layout_marginBottom="2dip"
-                android:onClick="Action"/>
+                style="@style/BoutonListe"/>
 
             <ImageButton
                 android:src="@drawable/attendre"
-                android:scaleType="fitEnd"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
                 android:background="@drawable/attendretitre"
                 android:id="@+id/attendre"
-                android:layout_marginBottom="2dip"
-                android:onClick="Action"/>
+                style="@style/BoutonListe"/>
 
             <ImageButton
                 android:src="@drawable/devoir"
-                android:scaleType="fitEnd"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
                 android:background="@drawable/devoirstitre"
                 android:id="@+id/devoir"
-                android:layout_marginBottom="2dip"
-                android:onClick="Action"/>
+                style="@style/BoutonListe"/>
 
             <ImageButton
                 android:src="@drawable/argent"

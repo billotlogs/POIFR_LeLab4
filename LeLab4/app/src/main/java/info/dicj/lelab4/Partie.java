@@ -1,5 +1,7 @@
 package info.dicj.lelab4;
 
+import java.util.ArrayList;
+
 /**
  * Created by utilisateur on 30/01/2017.
  */
@@ -7,11 +9,27 @@ public class Partie {
     String jourSemaine;
     int jour, heure, minute;
 
+    ArrayList<Nourriture> listNourriture;
+    Nourriture ramen = new Nourriture("Ramen", 10, 1.39);
+    Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
+    Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
+
+    ArrayList<Devoir> listDevoirs;
+    Devoir lab4 = new Devoir("Lab 4", 0, 10);
+
     public Partie(int jour, int heure, int minute, String jourSemaine){
         this.jour = jour;
         this.heure = heure;
         this.minute = minute;
         this.jourSemaine = jourSemaine;
+
+        listNourriture = new ArrayList<Nourriture>();
+        listNourriture.add(ramen);
+        listNourriture.add(pfk);
+        listNourriture.add(dep);
+
+        listDevoirs = new ArrayList<Devoir>();
+        listDevoirs.add(lab4);
     }
 
     //Permet d'avancer dans le temps.
@@ -54,7 +72,7 @@ public class Partie {
                 break;
         }
     }
-    
+
     public void Sauvegarder(){
 
     }
@@ -62,6 +80,7 @@ public class Partie {
     public void Charger(){
 
     }
+
 
     public int getMinute() {
         return minute;
@@ -75,7 +94,11 @@ public class Partie {
         return jour;
     }
 
-    public String getjourSemaine() {
+    public String getJourSemaine() {
         return jourSemaine;
+    }
+
+    public ArrayList<Nourriture> getListNourriture() {
+        return listNourriture;
     }
 }

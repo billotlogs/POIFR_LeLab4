@@ -22,10 +22,6 @@ public class MainActivity extends AppCompatActivity{
 
     ListView lvNourriture;
     BouffeAdapter adapter;
-    ArrayList<Nourriture> listNourriture;
-    Nourriture ramen = new Nourriture("Ramen", 10, 1.39);
-    Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
-    Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
 
     int nbHeure = 3;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
@@ -36,13 +32,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listNourriture = new ArrayList<Nourriture>();
-        listNourriture.add(ramen);
-        listNourriture.add(pfk);
-        listNourriture.add(dep);
-
         lvNourriture = (ListView)findViewById(R.id.menuManger);
-        adapter = new BouffeAdapter(this, listNourriture);
+        adapter = new BouffeAdapter(this, partie.getListNourriture());
         lvNourriture.setAdapter(adapter);
 
         ItemClick();
@@ -62,7 +53,6 @@ public class MainActivity extends AppCompatActivity{
 
     //Effectue une action lors d'un click sur un bouton.
     public void Action(View view) {
-        View menuPrincipal = findViewById(R.id.menuPrincipal);
         View menuManger = findViewById(R.id.menuManger);
         View menuHeure = findViewById(R.id.menuHeure);
         //View menuDevoir = findViewById(R.id.devoir);
@@ -85,6 +75,18 @@ public class MainActivity extends AppCompatActivity{
                 //OuvreFerme(menuDevoir);
                 break;
         }
+    }
+
+    //Action lors d'un click sur un élément d'une listview.
+    private void ItemClick(){
+        //Choix de la nourriture.
+        lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                joueur.Manger(partie.getListNourriture().get(i));
+                UpdateText();
+            }
+        });
     }
 
     //Ouvre ou ferme un menu d'actions
@@ -117,27 +119,15 @@ public class MainActivity extends AppCompatActivity{
         txtNbHeure.setText("" + nbHeure);
     }
 
-    //Action lors d'un click sur un élément d'une listview.
-    private void ItemClick(){
-        //Choix de la nourriture.
-        lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                joueur.Manger(listNourriture.get(i));
-                UpdateText();
-            }
-        });
-    }
-
     //Met à jour les textes.
     private void UpdateText(){
-        txtFaim.setText("" + joueur.faim);
-        txtArgent.setText("" + joueur.argent);
-        txtEnergie.setText("" + joueur.energie);
-        txtSante.setText("" + joueur.santeMentale);
+        txtFaim.setText("" + joueur.getFaim());
+        txtArgent.setText("" + joueur.getArgent());
+        txtEnergie.setText("" + joueur.getEnergie());
+        txtSante.setText("" + joueur.getSanteMentale());
         txtHeure.setText("" + partie.getHeure() + "h" + partie.getMinute());
-        txtJourSemaine.setText("" + partie.jourSemaine);
-        txtNbJour.setText("Jour " + partie.jour);
+        txtJourSemaine.setText("" + partie.getJourSemaine());
+        txtNbJour.setText("Jour " + partie.getJour());
     }
 
     //Permet au sous menus d'être scrollable.

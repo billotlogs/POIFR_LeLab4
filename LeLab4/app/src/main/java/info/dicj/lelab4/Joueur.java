@@ -61,4 +61,24 @@ public class Joueur {
     public void Attendre(){
 
     }
+
+    public int getEnergie() {
+        return energie;
+    }
+
+    public int getSanteMentale() {
+        return santeMentale;
+    }
+
+    public int getFaim() {
+        return faim;
+    }
+
+    public int getConnaissance() {
+        return connaissance;
+    }
+
+    public double getArgent() {
+        return argent;
+    }
 }

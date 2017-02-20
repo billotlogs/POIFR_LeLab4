@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.dormir:
                 joueur.Dormir();
+                partie.AvancerHeure(0, 8, 0);
                 UpdateText();
                 break;
             case R.id.attendre:
-                partie.AvancerHeure(0, 7, 0);
                 UpdateText();
                 break;
             case R.id.devoir:
@@ -109,7 +109,8 @@ public class MainActivity extends AppCompatActivity{
                     nbHeure--;
                 break;
             case R.id.valider:
-                joueur.Travailler(nbHeure);
+                if(joueur.Travailler(nbHeure))
+                    partie.AvancerHeure(0, nbHeure, 0);
                 UpdateText();
                 break;
         }

@@ -23,6 +23,9 @@ public class Joueur {
             argent -= bouffe.prix;
             faim += bouffe.alimentation;
         }
+
+        if(faim > 100)
+            faim = 100;
     }
 
     public void Dormir(){
@@ -37,11 +40,14 @@ public class Joueur {
 
     }
 
-    public void Travailler(int heure){
-        heure = 3;
-        faim -= 5 * heure;
-        energie -= 10 * heure;
-        argent += 11.25 * heure;
+    public boolean Travailler(int heure){
+        if((energie - 10 * heure >= 0) && (faim - 5 * heure >= 0)){
+            faim -= 5 * heure;
+            energie -= 10 * heure;
+            argent += 11.25 * heure;
+            return true;
+        }
+        return false;
     }
 
     public void Vivre(){

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
+    Partie partie = new Partie(1, 6, 30, "Lundi");
     Joueur joueur = new Joueur(100, 100, 100, 0, 200);
 
     ListView lvNourriture;
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity{
     Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
     Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
 
-    int nbHeure = 0;
+    int nbHeure = 3;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
+    TextView txtHeure, txtNbJour, txtJourSemaine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,11 @@ public class MainActivity extends AppCompatActivity{
         txtEnergie = (TextView)findViewById(R.id.txtEnergie);
         txtSante = (TextView)findViewById(R.id.txtSante);
         txtNbHeure = (TextView)findViewById(R.id.nbHeure);
+        txtHeure = (TextView)findViewById(R.id.txtHeure);
+        txtNbJour = (TextView)findViewById(R.id.txtNbJours);
+        txtJourSemaine = (TextView)findViewById(R.id.txtJourSemaine);
 
-        txtFaim.setText("" + joueur.faim);
-        txtArgent.setText("" + joueur.argent);
-        txtEnergie.setText("" + joueur.energie);
-        txtSante.setText("" + joueur.santeMentale);
+        UpdateText();
     }
 
     //Effectue une action lors d'un click sur un bouton.
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
                 break;
             case R.id.attendre:
+                partie.AvancerHeure(0, 7, 0);
+                UpdateText();
                 break;
             case R.id.devoir:
                 //OuvreFerme(menuDevoir);
@@ -97,10 +101,12 @@ public class MainActivity extends AppCompatActivity{
     public void HeureTravail(View view){
         switch (view.getId()){
             case R.id.increase:
-                nbHeure++;
+                if(nbHeure < 8)
+                    nbHeure++;
                 break;
             case R.id.decrease:
-                nbHeure--;
+                if(nbHeure > 3)
+                    nbHeure--;
                 break;
             case R.id.valider:
                 joueur.Travailler(nbHeure);
@@ -128,6 +134,9 @@ public class MainActivity extends AppCompatActivity{
         txtArgent.setText("" + joueur.argent);
         txtEnergie.setText("" + joueur.energie);
         txtSante.setText("" + joueur.santeMentale);
+        txtHeure.setText("" + partie.getHeure() + "h" + partie.getMinute());
+        txtJourSemaine.setText("" + partie.jourSemaine);
+        txtNbJour.setText("Jour " + partie.jour);
     }
 
     //Permet au sous menus d'être scrollable.

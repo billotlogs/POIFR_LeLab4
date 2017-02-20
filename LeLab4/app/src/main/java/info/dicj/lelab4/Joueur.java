@@ -38,6 +38,7 @@ public class Joueur {
     }
 
     public void Travailler(int heure){
+        heure = 3;
         faim -= 5 * heure;
         energie -= 10 * heure;
         argent += 11.25 * heure;

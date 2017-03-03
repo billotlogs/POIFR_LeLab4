@@ -170,10 +170,17 @@
                 style="@style/BoutonListe"/>
 
             <ImageButton
-                android:src="@drawable/argent"
+                android:src="@drawable/cours"
+                android:background="@drawable/courstitre"
+                android:id="@+id/assisterCours"
+                style="@style/BoutonListe"/>
+
+            <ListView
+                android:layout_height="188dip"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_bouton"/>
+                android:id="@+id/menuCours"
+                android:visibility="gone">
+            </ListView>
 
             <ImageButton
                 android:src="@drawable/argent"

@@ -14,6 +14,17 @@ public class Partie {
     Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
     Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
 
+    ArrayList<Cours> listCours;
+    Cours prog = new Cours("Programmation", 3, 5, 5);
+    Cours francais = new Cours("Français", 2, 5, 5);
+    Cours android = new Cours("Android", 3, 5, 5);
+    Cours math = new Cours("Math", 2, 5, 5);
+    Cours philo = new Cours("Philosophie", 3, 5, 5);
+    Cours bd = new Cours("BD", 3, 5, 5);
+    Cours os = new Cours("OS", 3, 5, 5);
+    Cours anglais = new Cours("Anglais", 3, 5, 5);
+
+
     ArrayList<Devoir> listDevoirs;
     Devoir lab4 = new Devoir("Lab 4", 0, 10);
 
@@ -22,6 +33,11 @@ public class Partie {
         this.heure = heure;
         this.minute = minute;
         this.jourSemaine = jourSemaine;
+
+        listCours = new ArrayList<Cours>();
+        listCours.add(prog);
+        listCours.add(francais);
+        listCours.add(android);
 
         listNourriture = new ArrayList<Nourriture>();
         listNourriture.add(ramen);
@@ -34,13 +50,15 @@ public class Partie {
 
     //Permet d'avancer dans le temps.
     public void AvancerHeure(int jour, int heure, int minute){
+        int jourActuel = this.jour;
         this.jour += jour;
 
         if(this.heure + heure < 24)
             this.heure += heure;
-            else {
+        else {
             this.heure = (this.heure + heure) - 24;
             this.jour++;
+            ChangeJourSemaine();
         }
 
         if(this.minute + minute < 60)
@@ -50,25 +68,80 @@ public class Partie {
             this.heure++;
         }
 
-        ChangeJourSemaine();
+        if(jourActuel != this.jour){
+            ChangeJourSemaine();
+        }
     }
 
-    //Décide du nom du jour de la semaine.
+    //Décide du nom du jour de la semaine et change les cours du jour.
     private void ChangeJourSemaine(){
+        listCours.clear();
+
         switch(jour%7){
-            case 1: jourSemaine = "Lundi";
+            case 1:
+                jourSemaine = "Lundi";
+                listCours.add(prog);
+                listCours.add(francais);
+                listCours.add(android);
                 break;
-            case 2: jourSemaine = "Mardi";
+            case 2:
+                jourSemaine = "Mardi";
+                listCours.add(math);
+                listCours.add(francais);
+                listCours.add(philo);
                 break;
-            case 3: jourSemaine = "Mercredi";
+            case 3:
+                jourSemaine = "Mercredi";
+                listCours.add(bd);
+                listCours.add(os);
                 break;
-            case 4: jourSemaine = "Jeudi";
+            case 4:
+                jourSemaine = "Jeudi";
+                listCours.add(anglais);
+                listCours.add(math);
                 break;
-            case 5: jourSemaine = "Vendredi";
+            case 5:
+                jourSemaine = "Vendredi";
+                listCours.add(prog);
+                listCours.add(math);
                 break;
             case 6: jourSemaine = "Samedi";
                 break;
             case 0: jourSemaine = "Dimanche";
+                break;
+        }
+    }
+
+    //Détermine quels cours sont disponible selon le jour de la semaine.
+    private void CoursDuJour(){
+        listCours.clear();
+
+        switch(jourSemaine){
+            case "Lundi":
+                listCours.add(prog);
+                listCours.add(francais);
+                listCours.add(android);
+                break;
+            case "Mardi":
+                listCours.add(math);
+                listCours.add(francais);
+                listCours.add(philo);
+                break;
+            case "Mercredi":
+                listCours.add(bd);
+                listCours.add(os);
+                break;
+            case "Jeudi":
+                listCours.add(anglais);
+                listCours.add(math);
+                break;
+            case "Vendredi":
+                listCours.add(prog);
+                listCours.add(math);
+                break;
+            case "Samedi":
+                break;
+            case "Dimanche":
                 break;
         }
     }
@@ -100,5 +173,9 @@ public class Partie {
 
     public ArrayList<Nourriture> getListNourriture() {
         return listNourriture;
+    }
+
+    public ArrayList<Cours> getlistCours() {
+        return listCours;
     }
 }

@@ -36,10 +36,6 @@ public class Joueur {
 
     }
 
-    public void ChangerLieu(){
-
-    }
-
     public boolean Travailler(int heure){
         if((energie - 10 * heure >= 0) && (faim - 5 * heure >= 0)){
             faim -= 5 * heure;
@@ -54,8 +50,14 @@ public class Joueur {
 
     }
 
-    public void AssisterCours(){
-
+    public boolean AssisterCours(Cours cours){
+        if((energie - 10 * cours.getDureeHeure() >= 0) && (faim - 5 * cours.getDureeHeure() >= 0)){
+            faim -= 5 * cours.getDureeHeure();
+            energie -= 10 * cours.getDureeHeure();
+            return true;
+        }
+        else
+            return false;
     }
 
     public void Attendre(){

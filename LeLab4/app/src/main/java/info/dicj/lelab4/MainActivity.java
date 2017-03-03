@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity{
     Joueur joueur = new Joueur(100, 100, 100, 0, 200);
 
     ListView lvNourriture;
-    BouffeAdapter adapter;
+    ListView lvCours;
+    BouffeAdapter bouffeAdapter;
+    CoursAdapter coursAdapter;
 
     int nbHeure = 3;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
@@ -33,10 +35,14 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         lvNourriture = (ListView)findViewById(R.id.menuManger);
-        adapter = new BouffeAdapter(this, partie.getListNourriture());
-        lvNourriture.setAdapter(adapter);
+        bouffeAdapter = new BouffeAdapter(this, partie.getListNourriture());
+        lvNourriture.setAdapter(bouffeAdapter);
 
-        ItemClick();
+        lvCours = (ListView)findViewById(R.id.menuCours);
+        coursAdapter = new CoursAdapter(this, partie.getlistCours());
+        lvCours.setAdapter(coursAdapter);
+
+        Action();
         ScrollFocus();
 
         txtFaim = (TextView)findViewById(R.id.txtFaim);
@@ -51,11 +57,13 @@ public class MainActivity extends AppCompatActivity{
         UpdateText();
     }
 
-    //Effectue une action lors d'un click sur un bouton.
-    public void Action(View view) {
+    //Défini quel menu d'action doit ouvrir lors d'un click sur un bouton du scrollview.
+    public void OuvreMenuAction(View view) {
         View menuManger = findViewById(R.id.menuManger);
         View menuHeure = findViewById(R.id.menuHeure);
-        //View menuDevoir = findViewById(R.id.devoir);
+        View menuCours = findViewById(R.id.menuCours);
+        View menuDevoir = findViewById(R.id.devoir);
+
         switch(view.getId()){
             case R.id.manger:
                 OuvreFerme(menuManger);
@@ -72,21 +80,12 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
                 break;
             case R.id.devoir:
-                //OuvreFerme(menuDevoir);
+                OuvreFerme(menuDevoir);
+                break;
+            case R.id.assisterCours:
+                OuvreFerme(menuCours);
                 break;
         }
-    }
-
-    //Action lors d'un click sur un élément d'une listview.
-    private void ItemClick(){
-        //Choix de la nourriture.
-        lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                joueur.Manger(partie.getListNourriture().get(i));
-                UpdateText();
-            }
-        });
     }
 
     //Ouvre ou ferme un menu d'actions
@@ -97,6 +96,18 @@ public class MainActivity extends AppCompatActivity{
         else{
             menu.setVisibility(menu.GONE);
         }
+    }
+
+    //Action lors d'un click sur un élément d'une listview.
+    private void Action(){
+        //Choix de la nourriture.
+        lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                joueur.Manger(partie.getListNourriture().get(i));
+                UpdateText();
+            }
+        });
     }
 
     //Permet de choisir le nombre d'heures travaillées.
@@ -130,7 +141,7 @@ public class MainActivity extends AppCompatActivity{
         txtNbJour.setText("Jour " + partie.getJour());
     }
 
-    //Permet au sous menus d'être scrollable.
+    //Permet aux sous menus d'être scrollable.
     private void ScrollFocus(){
         lvNourriture.setOnTouchListener(new ListView.OnTouchListener() {
             @Override

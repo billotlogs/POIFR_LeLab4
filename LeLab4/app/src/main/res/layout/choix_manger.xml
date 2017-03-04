@@ -3,53 +3,38 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dip"
         android:background="@drawable/texture2"
         android:columnCount="2"
         android:layout_marginBottom="2dip">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dip"
+        <info.dicj.lelab4.NewFontTextView
+            style="@style/titreSousMenus"
             android:text="Nom"
-            android:textSize="25sp"
-            android:textColor="#FFFF"
-            android:gravity="center"
-            android:id="@+id/nom_nourriture"
-            android:layout_column="0"/>
+            android:id="@+id/nom_nourriture" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_column="1"
-            android:layout_gravity="end">
+            android:layout_alignParentEnd="true">
 
             <ImageView
-                android:layout_width="30dip"
-                android:layout_height="match_parent"
+                style="@style/iconeSousMenus"
                 android:src="@drawable/argent"/>
-
             <TextView
-                android:layout_width="50dip"
-                android:layout_height="match_parent"
+                style="@style/textIconeSousMenus.Vert"
                 android:text="prix"
-                android:gravity="center"
                 android:id="@+id/prix_nourriture"/>
 
             <ImageView
-                android:layout_width="30dip"
-                android:layout_height="match_parent"
+                style="@style/iconeSousMenus"
                 android:src="@drawable/faim"/>
-
             <TextView
-                android:layout_width="50dip"
-                android:layout_height="match_parent"
+                style="@style/textIconeSousMenus.Brun"
                 android:text="alim"
-                android:gravity="center"
                 android:id="@+id/alimentation_nourriture"/>
         </LinearLayout>
-    </GridLayout>
+    </RelativeLayout>
 </LinearLayout>

@@ -5,13 +5,18 @@ package info.dicj.lelab4;
  */
 public class Cours {
     String nom;
-    int dureeHeure, coutEnergie, coutSante;
+    int dureeHeure, coutEnergie, coutSante, coutFaim;
 
-    public Cours(String nom, int dureeHeure, int coutEnergie, int coutSante){
+    public Cours(String nom, int dureeHeure, int coutEnergie, int coutSante, int coutFaim){
         this.nom = nom;
         this.dureeHeure = dureeHeure;
         this.coutEnergie = coutEnergie;
         this.coutSante = coutSante;
+        this.coutFaim = coutFaim;
+    }
+
+    public int getCoutFaim() {
+        return coutFaim;
     }
 
     public int getDureeHeure() {

@@ -10,12 +10,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+*   Trouver un moyen pour avancer le temps a chaque action.
+*   Trouver un moyen pour updater l'adapter a chaque fois qu'un jour passe.
+*   Optimiser le code XML avec des styles.
+ */
 public class MainActivity extends AppCompatActivity{
     Partie partie = new Partie(1, 6, 30, "Lundi");
     Joueur joueur = new Joueur(100, 100, 100, 0, 200);
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity{
     int nbHeure = 3;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
     TextView txtHeure, txtNbJour, txtJourSemaine;
+
+    ProgressBar progressFaim, progressSante, progressEnergie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,10 @@ public class MainActivity extends AppCompatActivity{
         txtNbJour = (TextView)findViewById(R.id.txtNbJours);
         txtJourSemaine = (TextView)findViewById(R.id.txtJourSemaine);
 
+        progressEnergie = (ProgressBar)findViewById(R.id.progressEnergie);
+        progressFaim = (ProgressBar)findViewById(R.id.progressFaim);
+        progressSante = (ProgressBar)findViewById(R.id.progressSante);
+
         UpdateText();
     }
 
@@ -62,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
         View menuManger = findViewById(R.id.menuManger);
         View menuHeure = findViewById(R.id.menuHeure);
         View menuCours = findViewById(R.id.menuCours);
-        View menuDevoir = findViewById(R.id.devoir);
+        //View menuDevoir = findViewById(R.id.devoir);
 
         switch(view.getId()){
             case R.id.manger:
@@ -80,7 +92,7 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
                 break;
             case R.id.devoir:
-                OuvreFerme(menuDevoir);
+                //OuvreFerme(menuDevoir);
                 break;
             case R.id.assisterCours:
                 OuvreFerme(menuCours);
@@ -108,6 +120,15 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
             }
         });
+
+        //Choix du cours.
+        lvCours.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                joueur.AssisterCours(partie.getlistCours().get(i));
+                UpdateText();
+            }
+        });
     }
 
     //Permet de choisir le nombre d'heures travaillées.
@@ -130,15 +151,19 @@ public class MainActivity extends AppCompatActivity{
         txtNbHeure.setText("" + nbHeure);
     }
 
-    //Met à jour les textes.
+    //Met à jour les textes et les progress bars.
     private void UpdateText(){
-        txtFaim.setText("" + joueur.getFaim());
+        txtFaim.setText("" + joueur.getFaim() + "%");
         txtArgent.setText("" + joueur.getArgent());
-        txtEnergie.setText("" + joueur.getEnergie());
-        txtSante.setText("" + joueur.getSanteMentale());
+        txtEnergie.setText("" + joueur.getEnergie() + "%");
+        txtSante.setText("" + joueur.getSanteMentale() + "%");
         txtHeure.setText("" + partie.getHeure() + "h" + partie.getMinute());
         txtJourSemaine.setText("" + partie.getJourSemaine());
         txtNbJour.setText("Jour " + partie.getJour());
+
+        progressSante.setProgress(joueur.getSanteMentale());
+        progressFaim.setProgress(joueur.getFaim());
+        progressEnergie.setProgress(joueur.getEnergie());
     }
 
     //Permet aux sous menus d'être scrollable.

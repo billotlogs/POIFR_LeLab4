@@ -31,6 +31,7 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         TextView txtCoutEnergie;
         TextView txtCoutSante;
         TextView txtTempsRequis;
+        TextView txtCoutFaim;
     }
 
     @NonNull
@@ -50,6 +51,7 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             viewHolder.txtNom = (TextView) convertView.findViewById(R.id.txtNomCours);
             viewHolder.txtCoutSante = (TextView) convertView.findViewById(R.id.txtCoutSante);
             viewHolder.txtTempsRequis = (TextView) convertView.findViewById(R.id.txtTempsRequis);
+            viewHolder.txtCoutFaim = (TextView) convertView.findViewById(R.id.txtCoutFaim);
 
             result = convertView;
             convertView.setTag(viewHolder);
@@ -59,9 +61,10 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         }
 
         viewHolder.txtNom.setText("" + donnee.getNom());
-        viewHolder.txtCoutEnergie.setText("" + donnee.getCoutEnergie());
-        viewHolder.txtCoutSante.setText("" + donnee.getCoutSante());
+        viewHolder.txtCoutEnergie.setText("-" + donnee.getCoutEnergie());
+        viewHolder.txtCoutSante.setText("-" + donnee.getCoutSante());
         viewHolder.txtTempsRequis.setText("" + donnee.getDureeHeure() + "h");
+        viewHolder.txtCoutFaim.setText("-" + donnee.getCoutFaim());
 
         return convertView;
     }

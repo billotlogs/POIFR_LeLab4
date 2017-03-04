@@ -12,18 +12,17 @@ public class Partie {
     ArrayList<Nourriture> listNourriture;
     Nourriture ramen = new Nourriture("Ramen", 10, 1.39);
     Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
-    Nourriture dep = new Nourriture("Hot-Dog + Polar pop", 10, 4.49);
+    Nourriture dep = new Nourriture("2x Hot-Dog", 10, 4.49);
 
     ArrayList<Cours> listCours;
-    Cours prog = new Cours("Programmation", 3, 5, 5);
-    Cours francais = new Cours("Français", 2, 5, 5);
-    Cours android = new Cours("Android", 3, 5, 5);
-    Cours math = new Cours("Math", 2, 5, 5);
-    Cours philo = new Cours("Philosophie", 3, 5, 5);
-    Cours bd = new Cours("BD", 3, 5, 5);
-    Cours os = new Cours("OS", 3, 5, 5);
-    Cours anglais = new Cours("Anglais", 3, 5, 5);
-
+    Cours prog = new Cours("Programmation", 3, 5, 5, 5);
+    Cours francais = new Cours("Français", 2, 5, 5, 5);
+    Cours android = new Cours("Android", 3, 5, 5, 5);
+    Cours math = new Cours("Math", 2, 5, 5, 5);
+    Cours philo = new Cours("Philosophie", 3, 5, 5, 5);
+    Cours bd = new Cours("BD", 3, 5, 5, 5);
+    Cours os = new Cours("OS", 3, 5, 5, 5);
+    Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
     ArrayList<Devoir> listDevoirs;
     Devoir lab4 = new Devoir("Lab 4", 0, 10);

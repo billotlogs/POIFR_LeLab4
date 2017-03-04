@@ -51,9 +51,10 @@ public class Joueur {
     }
 
     public boolean AssisterCours(Cours cours){
-        if((energie - 10 * cours.getDureeHeure() >= 0) && (faim - 5 * cours.getDureeHeure() >= 0)){
-            faim -= 5 * cours.getDureeHeure();
-            energie -= 10 * cours.getDureeHeure();
+        if((energie - cours.getCoutEnergie() >= 0) && (faim - cours.getCoutFaim() >= 0) && (santeMentale - cours.getCoutSante() >= 0)){
+            faim -= cours.getCoutFaim();
+            energie -= cours.getCoutEnergie();
+            santeMentale -= cours.getCoutSante();
             return true;
         }
         else

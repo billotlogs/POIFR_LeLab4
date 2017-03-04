@@ -3,65 +3,63 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dip"
-        android:background="@drawable/texture3"
+        android:background="@drawable/texture4"
         android:columnCount="2"
         android:layout_marginBottom="2dip">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dip"
+        <info.dicj.lelab4.NewFontTextView
+            style="@style/titreSousMenus"
             android:text="Nom"
-            android:textSize="25sp"
-            android:textColor="#FFFF"
-            android:gravity="center"
-            android:id="@+id/txtNomCours"
-            android:layout_column="0"/>
+            android:id="@+id/txtNomCours" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_column="1"
-            android:layout_gravity="end">
+            android:layout_height="30dip"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/boutonCoursTopIcone">
 
             <ImageView
-                android:layout_width="30dip"
-                android:layout_height="match_parent"
+                style="@style/iconeSousMenus"
                 android:src="@drawable/sante"/>
-
             <TextView
-                android:layout_width="50dip"
-                android:layout_height="match_parent"
+                style="@style/textIconeSousMenus.Rouge"
                 android:text="Sante"
-                android:gravity="center"
                 android:id="@+id/txtCoutSante"/>
 
             <ImageView
-                android:layout_width="30dip"
-                android:layout_height="match_parent"
+                style="@style/iconeSousMenus"
                 android:src="@drawable/energie"/>
-
             <TextView
-                android:layout_width="50dip"
-                android:layout_height="match_parent"
+                style="@style/textIconeSousMenus.Jaune"
                 android:text="@string/energie"
-                android:gravity="center"
                 android:id="@+id/txtCoutEnergie"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_gravity="end"
+            android:layout_below="@id/boutonCoursTopIcone"
+            android:layout_alignParentEnd="true">
 
             <ImageView
-                android:layout_width="30dip"
-                android:layout_height="match_parent"
-                android:src="@drawable/temps"/>
-
+                style="@style/iconeSousMenus"
+                android:src="@drawable/faim" />
             <TextView
-                android:layout_width="50dip"
-                android:layout_height="match_parent"
+                style="@style/textIconeSousMenus.Brun"
+                android:text="Faim"
+                android:id="@+id/txtCoutFaim"/>
+
+            <ImageView
+                style="@style/iconeSousMenus"
+                android:src="@drawable/temps" />
+            <TextView
+                style="@style/textIconeSousMenus"
                 android:text="temps"
-                android:gravity="center"
                 android:id="@+id/txtTempsRequis"/>
         </LinearLayout>
-    </GridLayout>
+    </RelativeLayout>
 </LinearLayout>

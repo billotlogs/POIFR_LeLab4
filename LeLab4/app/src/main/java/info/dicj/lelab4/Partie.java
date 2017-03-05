@@ -47,6 +47,32 @@ public class Partie {
         listDevoirs.add(lab4);
     }
 
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getHeure() {
+        return heure;
+    }
+
+    public int getJour() {
+        return jour;
+    }
+
+    public String getJourSemaine() {
+        return jourSemaine;
+    }
+
+    public ArrayList<Nourriture> getListNourriture() {
+        return listNourriture;
+    }
+
+    public ArrayList<Cours> getlistCours() {
+        return listCours;
+    }
+
+
+
     //Permet d'avancer dans le temps.
     public boolean AvancerHeure(int jour, int heure, int minute){
         int jourActuel = this.jour;
@@ -114,36 +140,13 @@ public class Partie {
         }
     }
 
+    //Sauvegarde la partie en cours.
     public void Sauvegarder(){
 
     }
 
+    //Charge une partie autrefois sauvegardée.
     public void Charger(){
 
-    }
-
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public int getHeure() {
-        return heure;
-    }
-
-    public int getJour() {
-        return jour;
-    }
-
-    public String getJourSemaine() {
-        return jourSemaine;
-    }
-
-    public ArrayList<Nourriture> getListNourriture() {
-        return listNourriture;
-    }
-
-    public ArrayList<Cours> getlistCours() {
-        return listCours;
     }
 }

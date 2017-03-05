@@ -18,6 +18,28 @@ public class Joueur {
         this.argent = argent;
     }
 
+    public int getEnergie() {
+        return energie;
+    }
+
+    public int getSanteMentale() {
+        return santeMentale;
+    }
+
+    public int getFaim() {
+        return faim;
+    }
+
+    public int getConnaissance() {
+        return connaissance;
+    }
+
+    public double getArgent() {
+        return argent;
+    }
+
+
+
     public void Manger(Nourriture bouffe){
         if((argent >= bouffe.prix) && (faim < 100)){
             argent -= bouffe.prix;
@@ -63,25 +85,5 @@ public class Joueur {
 
     public void Attendre(){
 
-    }
-
-    public int getEnergie() {
-        return energie;
-    }
-
-    public int getSanteMentale() {
-        return santeMentale;
-    }
-
-    public int getFaim() {
-        return faim;
-    }
-
-    public int getConnaissance() {
-        return connaissance;
-    }
-
-    public double getArgent() {
-        return argent;
     }
 }

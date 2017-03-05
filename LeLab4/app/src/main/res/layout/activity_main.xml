@@ -19,29 +19,23 @@
         android:layout_marginBottom="10dip">
 
         <TextView
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
+            style="@style/affichageTemporel"
             android:text="@string/heureJour"
             android:id="@+id/txtHeure"
-            android:layout_alignParentStart="true"
-            android:textColor="#000"/>
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
+            style="@style/affichageTemporel"
             android:text="@string/jour"
             android:id="@+id/txtNbJours"
             android:layout_centerInParent="true"
-            android:textColor="#000"
             android:gravity="center"/>
 
         <TextView
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
+            style="@style/affichageTemporel"
             android:text="@string/jour_semaine"
             android:id="@+id/txtJourSemaine"
             android:layout_alignParentEnd="true"
-            android:textColor="#000"
             android:gravity="end"/>
     </RelativeLayout>
 
@@ -76,31 +70,20 @@
             android:layout_width="match_parent">
 
             <ImageView
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:src="@drawable/sante"
-                android:layout_marginBottom="5dp"/>
+                style="@style/iconeProgressBar"
+                android:src="@drawable/sante" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="30dip"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/cutomProgressBar"
                     android:progressDrawable="@drawable/red_progressbar"
-                    android:layout_marginTop="10dip"
-                    android:layout_marginStart="5dip"
-                    android:layout_marginEnd="5dip"
                     android:id="@+id/progressSante"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFF"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true"
+                    style="@style/progressbarIndicator"
                     android:id="@+id/txtSante"/>
             </RelativeLayout>
 
@@ -111,31 +94,20 @@
             android:layout_width="match_parent">
 
             <ImageView
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:src="@drawable/energie"
-                android:layout_marginBottom="5dp"/>
+                style="@style/iconeProgressBar"
+                android:src="@drawable/energie" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ProgressBar
-                    android:layout_width="match_parent"
-                    android:layout_height="30dip"
-                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/cutomProgressBar"
                     android:progressDrawable="@drawable/yellow_progressbar"
-                    android:layout_marginTop="10dip"
-                    android:layout_marginStart="5dip"
-                    android:layout_marginEnd="5dip"
                     android:id="@+id/progressEnergie"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFF"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true"
+                    style="@style/progressbarIndicator"
                     android:id="@+id/txtEnergie"/>
             </RelativeLayout>
 
@@ -143,34 +115,24 @@
 
         <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_marginBottom="15dip">
 
-        <ImageView
-            android:layout_width="50dip"
-            android:layout_height="50dip"
-            android:src="@drawable/faim"
-            android:layout_marginBottom="20dp"/>
+            <ImageView
+                style="@style/iconeProgressBar"
+                android:src="@drawable/faim" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="30dip"
-                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-                android:progressDrawable="@drawable/brown_progressbar"
-                android:layout_marginTop="10dip"
-                android:layout_marginStart="5dip"
-                android:layout_marginEnd="5dip"
-                android:id="@+id/progressFaim"/>
+                <ProgressBar
+                    style="@style/cutomProgressBar"
+                    android:progressDrawable="@drawable/brown_progressbar"
+                    android:id="@+id/progressFaim"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#FFF"
-                    android:textStyle="bold"
-                    android:layout_centerInParent="true"
+                    style="@style/progressbarIndicator"
                     android:id="@+id/txtFaim" />
             </RelativeLayout>
         </LinearLayout>

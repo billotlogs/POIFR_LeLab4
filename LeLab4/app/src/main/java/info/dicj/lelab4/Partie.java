@@ -48,7 +48,7 @@ public class Partie {
     }
 
     //Permet d'avancer dans le temps.
-    public void AvancerHeure(int jour, int heure, int minute){
+    public boolean AvancerHeure(int jour, int heure, int minute){
         int jourActuel = this.jour;
         this.jour += jour;
 
@@ -69,7 +69,10 @@ public class Partie {
 
         if(jourActuel != this.jour){
             ChangeJourSemaine();
+            return true;
         }
+        else
+            return false;
     }
 
     //Décide du nom du jour de la semaine et change les cours du jour.
@@ -107,40 +110,6 @@ public class Partie {
             case 6: jourSemaine = "Samedi";
                 break;
             case 0: jourSemaine = "Dimanche";
-                break;
-        }
-    }
-
-    //Détermine quels cours sont disponible selon le jour de la semaine.
-    private void CoursDuJour(){
-        listCours.clear();
-
-        switch(jourSemaine){
-            case "Lundi":
-                listCours.add(prog);
-                listCours.add(francais);
-                listCours.add(android);
-                break;
-            case "Mardi":
-                listCours.add(math);
-                listCours.add(francais);
-                listCours.add(philo);
-                break;
-            case "Mercredi":
-                listCours.add(bd);
-                listCours.add(os);
-                break;
-            case "Jeudi":
-                listCours.add(anglais);
-                listCours.add(math);
-                break;
-            case "Vendredi":
-                listCours.add(prog);
-                listCours.add(math);
-                break;
-            case "Samedi":
-                break;
-            case "Dimanche":
                 break;
         }
     }

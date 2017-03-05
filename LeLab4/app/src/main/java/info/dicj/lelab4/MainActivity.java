@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,8 +20,6 @@ import java.util.List;
 
 /*
 *   Trouver un moyen pour avancer le temps a chaque action.
-*   Trouver un moyen pour updater l'adapter a chaque fois qu'un jour passe.
-*   Optimiser le code XML avec des styles.
  */
 public class MainActivity extends AppCompatActivity{
     Partie partie = new Partie(1, 6, 30, "Lundi");
@@ -50,9 +49,6 @@ public class MainActivity extends AppCompatActivity{
         coursAdapter = new CoursAdapter(this, partie.getlistCours());
         lvCours.setAdapter(coursAdapter);
 
-        Action();
-        ScrollFocus();
-
         txtFaim = (TextView)findViewById(R.id.txtFaim);
         txtArgent = (TextView)findViewById(R.id.txtArgent);
         txtEnergie = (TextView)findViewById(R.id.txtEnergie);
@@ -67,6 +63,8 @@ public class MainActivity extends AppCompatActivity{
         progressSante = (ProgressBar)findViewById(R.id.progressSante);
 
         UpdateText();
+        Action();
+        ScrollFocus();
     }
 
     //Défini quel menu d'action doit ouvrir lors d'un click sur un bouton du scrollview.
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.dormir:
                 joueur.Dormir();
-                partie.AvancerHeure(0, 8, 0);
+                UpdateTemps(0, 8, 0);
                 UpdateText();
                 break;
             case R.id.attendre:
@@ -100,17 +98,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    //Ouvre ou ferme un menu d'actions
-    private void OuvreFerme(View menu){
-        if(menu.getVisibility() == menu.GONE){
-            menu.setVisibility(menu.VISIBLE);
-        }
-        else{
-            menu.setVisibility(menu.GONE);
-        }
-    }
-
-    //Action lors d'un click sur un élément d'une listview.
+    //Action lors d'un click sur un élément d'une listview (ClickListeners).
     private void Action(){
         //Choix de la nourriture.
         lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,8 +113,12 @@ public class MainActivity extends AppCompatActivity{
         lvCours.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                joueur.AssisterCours(partie.getlistCours().get(i));
-                UpdateText();
+                Cours coursChoisi = partie.getlistCours().get(i);
+
+                if(joueur.AssisterCours(coursChoisi)){
+                    UpdateTemps(0, coursChoisi.dureeHeure, 0);
+                    UpdateText();
+                }
             }
         });
     }
@@ -143,12 +135,25 @@ public class MainActivity extends AppCompatActivity{
                     nbHeure--;
                 break;
             case R.id.valider:
-                if(joueur.Travailler(nbHeure))
-                    partie.AvancerHeure(0, nbHeure, 0);
+                if(joueur.Travailler(nbHeure)){
+                    UpdateTemps(0, nbHeure, 0);
+                }
                 UpdateText();
                 break;
         }
         txtNbHeure.setText("" + nbHeure);
+    }
+
+
+
+    //Ouvre ou ferme un menu d'actions
+    private void OuvreFerme(View menu){
+        if(menu.getVisibility() == menu.GONE){
+            menu.setVisibility(menu.VISIBLE);
+        }
+        else{
+            menu.setVisibility(menu.GONE);
+        }
     }
 
     //Met à jour les textes et les progress bars.
@@ -168,20 +173,43 @@ public class MainActivity extends AppCompatActivity{
 
     //Permet aux sous menus d'être scrollable.
     private void ScrollFocus(){
-        lvNourriture.setOnTouchListener(new ListView.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        v.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
+        if(lvNourriture.getCount() > 3){
+            lvNourriture.setOnTouchListener(new ListView.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                    v.onTouchEvent(event);
+                    return true;
                 }
-                v.onTouchEvent(event);
-                return true;
-            }
-        });
+            });
+        }
+    }
+
+    //Met à jour tous les éléments qui sont changeable selon le temps.
+    private void UpdateTemps(int jour, int heure, int minute){
+        if(partie.AvancerHeure(jour, heure, minute)){
+            coursAdapter.notifyDataSetChanged();
+            AjusterListView(lvCours);
+        }
+    }
+
+    //Ajuste le Height du ListView selon le nombre d'élément à l'intérieur.
+    private void AjusterListView(ListView lv){
+        ViewGroup.LayoutParams params = lv.getLayoutParams();
+        int height = 0;
+
+        for(int i = 0; i < coursAdapter.getCount(); i++){
+            height += lv.getChildAt(0).getHeight() + lv.getDividerHeight();
+        }
+
+        params.height = height;
+        lv.setLayoutParams(params);
     }
 }

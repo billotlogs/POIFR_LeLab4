@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Style pour l'affichage temporel -->
+    <style name="affichageTemporel" parent="AppTheme">
+        <item name="android:layout_width">100dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <!-- Style pour les boutons de la liste -->
     <style name="BoutonListe" parent="AppTheme">
         <item name="android:scaleType">fitEnd</item>
         <item name="android:layout_width">match_parent</item>
@@ -52,5 +60,28 @@
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#FFFF</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Style pour les progressbars -->
+    <style name="cutomProgressBar" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dip</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:layout_marginStart">5dip</item>
+        <item name="android:layout_marginEnd">5dip</item>
+    </style>
+
+    <style name="iconeProgressBar" parent="AppTheme">
+        <item name="android:layout_height">50dip</item>
+        <item name="android:layout_width">50dip</item>
+        <item name="android:layout_marginBottom">5dip</item>
+    </style>
+
+    <style name="progressbarIndicator" parent="AppTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerInParent">true</item>
     </style>
 </resources>

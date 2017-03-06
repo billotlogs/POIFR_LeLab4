@@ -20,6 +20,7 @@ import java.util.List;
 
 /*
 *   Trouver un moyen pour avancer le temps a chaque action.
+*   Trouver un moyen de mettre un événement random selon le type d'action.
  */
 public class MainActivity extends AppCompatActivity{
     Partie partie = new Partie(1, 6, 30, "Lundi");

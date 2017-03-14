@@ -23,7 +23,6 @@ import java.util.List;
 *   Trouver un moyen de mettre un événement random selon le type d'action.
  */
 public class MainActivity extends AppCompatActivity{
-    Evenement event = new Evenement();
     Partie partie = new Partie(1, 6, 30, "Lundi");
     Joueur joueur = new Joueur(100, 100, 100, 0, 200);
 
@@ -89,8 +88,8 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
                 break;
             case R.id.attendre:
-                event.ChanceRealisation(90);
-                UpdateText();
+                //event.ChanceRealisation(90);
+                //UpdateText();
                 break;
             case R.id.devoir:
                 //OuvreFerme(menuDevoir);

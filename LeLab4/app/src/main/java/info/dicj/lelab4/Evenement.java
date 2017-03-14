@@ -3,6 +3,7 @@ package info.dicj.lelab4;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,35 +11,38 @@ import java.util.Random;
  */
 public class Evenement {
     Random rnd;
+    int chanceSucces, energie;
+    String text, nom;
 
-    public Evenement() {
+    public Evenement(String nom, String text, int chanceSucces, int energie) {
+        this.chanceSucces = chanceSucces;
+        this.text = text;
+        this.energie = energie;
+        this.nom = nom;
         rnd = new Random();
     }
 
-    public void GenererEvent(){
-
+    public int getChanceSucces() {
+        return chanceSucces;
     }
 
-    private void EvenementCours(){
-        int chance = rnd.nextInt(100);
-
-        switch(chance){
-
-        }
+    public int getEnergie() {
+        return energie;
     }
 
-    public void ChanceRealisation(int chanceSucces){
-        int chance = rnd.nextInt(101 - chanceSucces) + chanceSucces;
-
-        if(chance == 100){
-            Log.i("Test", "Fuck you");
-        }
-        Log.i("Test", "Chance : " + chance);
+    public String getText() {
+        return text;
     }
 
-    private void NouveauDevoir(Cours cours){
+    public String getNom() {
+        return nom;
+    }
+
+    /*
+    public void EvenementCours(Cours cours){
         switch(cours.getNom()){
             case "Programmation":
+
                 break;
             case "Français":
                 break;
@@ -55,5 +59,24 @@ public class Evenement {
             case "Anglais":
                 break;
         }
+    }
+    */
+
+    /*
+    public String EvenementDormir(){
+        String text = "Asd";
+
+        return text;
+    }
+    */
+
+    //Détermine la chance en pourcentage qu'une action se réalise.
+    public boolean ChanceRealisation(){
+        int chance = rnd.nextInt(101 - chanceSucces) + chanceSucces;
+
+        if(chance == 100)
+            return true;
+        else
+            return false;
     }
 }

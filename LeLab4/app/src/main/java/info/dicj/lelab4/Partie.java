@@ -25,6 +25,7 @@ public class Partie {
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
     ArrayList<Devoir> listDevoirs;
+    ArrayList<Devoir> listDevoirsActifs;
     Devoir lab4 = new Devoir("Lab 4", 0, 10);
 
     public Partie(int jour, int heure, int minute, String jourSemaine){
@@ -45,6 +46,8 @@ public class Partie {
 
         listDevoirs = new ArrayList<Devoir>();
         listDevoirs.add(lab4);
+
+        listDevoirsActifs = new ArrayList<Devoir>();
     }
 
     public int getMinute() {

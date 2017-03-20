@@ -26,8 +26,9 @@ import java.util.zip.Inflater;
 *   Trouver un moyen de mettre un événement random selon le type d'action.
  */
 public class MainActivity extends AppCompatActivity{
+    Temps temps = new Temps(1, 6, 30, "Lundi");
     Partie partie = new Partie(1, 6, 30, "Lundi");
-    Joueur joueur = new Joueur(100, 100, 100, 0, 200);
+    Joueur joueur = new Joueur(100, 100, 100, 0, 200, temps);
 
     ListView lvNourriture;
     ListView lvCours;

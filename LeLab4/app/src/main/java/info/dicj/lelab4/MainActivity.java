@@ -3,7 +3,9 @@ package info.dicj.lelab4;
 import android.content.ClipData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 /*
 *   Trouver un moyen pour avancer le temps a chaque action.
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
         lvNourriture.setAdapter(bouffeAdapter);
 
         lvCours = (ListView)findViewById(R.id.menuCours);
-        coursAdapter = new CoursAdapter(this, partie.getlistCours());
+        coursAdapter = new CoursAdapter(this, partie.getListCours());
         lvCours.setAdapter(coursAdapter);
 
         txtFaim = (TextView)findViewById(R.id.txtFaim);
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity{
         lvCours.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Cours coursChoisi = partie.getlistCours().get(i);
+                Cours coursChoisi = partie.getListCours().get(i);
 
                 if(joueur.AssisterCours(coursChoisi)){
                     UpdateTemps(0, coursChoisi.dureeHeure, 0);
@@ -205,10 +208,11 @@ public class MainActivity extends AppCompatActivity{
     //Ajuste le Height du ListView selon le nombre d'élément à l'intérieur.
     private void AjusterListView(ListView lv){
         ViewGroup.LayoutParams params = lv.getLayoutParams();
+        float hauteurItem = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
         int height = 0;
 
         for(int i = 0; i < coursAdapter.getCount(); i++){
-            height += lv.getChildAt(0).getHeight() + lv.getDividerHeight();
+            height += hauteurItem + lv.getDividerHeight();
         }
 
         params.height = height;

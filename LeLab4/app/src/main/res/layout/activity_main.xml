@@ -151,7 +151,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ligne"
         android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip">
+        android:layout_marginRight="5dip"
+        android:id="@+id/scrollView">
 
         <TableLayout
             android:layout_width="match_parent"

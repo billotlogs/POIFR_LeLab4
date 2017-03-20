@@ -1,5 +1,6 @@
 package info.dicj.lelab4;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,15 +13,19 @@ import java.util.Random;
  */
 public class Joueur {
     Random rnd;
-    Evenement cauchemar = new Evenement("Cauchemar", "Vous rêvez du Lab4", 50, -10);
-    ArrayList<Evenement> listEventDormir;
+
+    ArrayList<Evenement> listEventDormir, listEventTravail;
 
     int energie, santeMentale, faim, connaissance;
     double argent;
 
-    public Joueur(int energie, int santeMentale, int faim, int connaissance, double argent){
+    public Joueur(int energie, int santeMentale, int faim, int connaissance, double argent, Temps temps){
         listEventDormir = new ArrayList<Evenement>();
+        listEventTravail = new ArrayList<Evenement>();
+        CreerEvenement();
+
         rnd = new Random();
+
         this.energie = energie;
         this.santeMentale = santeMentale;
         this.faim = faim;
@@ -48,12 +53,19 @@ public class Joueur {
         return argent;
     }
 
+
+    private void CreerEvenement(){
+        Evenement cauchemar = new Evenement("Cauchemar", "Vous rêvez du Lab4", 50, -10, -10, 0, 0);
+        listEventDormir.add(cauchemar);
+
+        Evenement laveVaisselle = new Evenement("Problème technique", "Le lave vaisselle est brisé, vous devez lavez tout à la main.", 10, -20, -10, -5, 0);
+        listEventTravail.add(laveVaisselle);
+    }
+
     //**************************************************************************************
-    private boolean EvenementRandom(ArrayList<Evenement> listEvent){
-        if(listEventDormir.get(rnd.nextInt(listEventDormir.size())).ChanceRealisation())
-            return true;
-        else
-            return false;
+    private Evenement EvenementRandom(ArrayList<Evenement> listEvent){
+        Evenement evenement = listEvent.get(rnd.nextInt(listEvent.size()));
+        return evenement;
     }
 
     public void Manger(Nourriture bouffe){
@@ -67,8 +79,9 @@ public class Joueur {
     }
 
     public void Dormir(){
-        if(EvenementRandom(listEventDormir))
+        Evenement evenement = EvenementRandom(listEventDormir);
         energie = 100;
+        evenement.EffectuerEvent(this);
     }
 
     public void FaireDevoir(){
@@ -77,12 +90,14 @@ public class Joueur {
 
     public boolean Travailler(int heure){
         if((energie - 10 * heure >= 0) && (faim - 5 * heure >= 0)){
+            Evenement evenement = EvenementRandom(listEventTravail);
             faim -= 5 * heure;
             energie -= 10 * heure;
             argent += 11.25 * heure;
             return true;
         }
-        return false;
+        else
+            return false;
     }
 
     public void Vivre(){

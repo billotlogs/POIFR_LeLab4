@@ -1,8 +1,11 @@
 package info.dicj.lelab4;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,23 +14,19 @@ import java.util.Random;
  */
 public class Evenement {
     Random rnd;
-    int chanceSucces, energie;
+    int chanceSucces, modifEnergie, modifSanteMentale, modifFaim, modifArgent;
     String text, nom;
 
-    public Evenement(String nom, String text, int chanceSucces, int energie) {
+    public Evenement(String nom, String text, int chanceSucces, int modifEnergie, int modifSanteMentale, int modifFaim, int modifArgent) {
         this.chanceSucces = chanceSucces;
         this.text = text;
-        this.energie = energie;
+        this.modifEnergie = modifEnergie;
+        this.modifArgent = modifArgent;
+        this.modifFaim = modifFaim;
+        this.modifSanteMentale = modifSanteMentale;
         this.nom = nom;
+
         rnd = new Random();
-    }
-
-    public int getChanceSucces() {
-        return chanceSucces;
-    }
-
-    public int getEnergie() {
-        return energie;
     }
 
     public String getText() {
@@ -38,43 +37,20 @@ public class Evenement {
         return nom;
     }
 
-    /*
-    public void EvenementCours(Cours cours){
-        switch(cours.getNom()){
-            case "Programmation":
-
-                break;
-            case "Français":
-                break;
-            case "Android":
-                break;
-            case "Math":
-                break;
-            case "Philosophie":
-                break;
-            case "BD":
-                break;
-            case "OS":
-                break;
-            case "Anglais":
-                break;
+    //Modifie les statistiques selon l'événement et montre un texte.
+    public void EffectuerEvent(Joueur joueur){
+        if(ChanceRealisation()){
+            joueur.santeMentale += modifSanteMentale;
+            joueur.argent += modifArgent;
+            joueur.faim += modifFaim;
+            joueur.energie += modifEnergie;
         }
     }
-    */
-
-    /*
-    public String EvenementDormir(){
-        String text = "Asd";
-
-        return text;
-    }
-    */
-
+    
     //Détermine la chance en pourcentage qu'une action se réalise.
-    public boolean ChanceRealisation(){
-        int chance = rnd.nextInt(101 - chanceSucces) + chanceSucces;
-
-        if(chance == 100)
+    private boolean ChanceRealisation(){
+        int chance = rnd.nextInt(101);
+        if(chance < chanceSucces)
             return true;
         else
             return false;

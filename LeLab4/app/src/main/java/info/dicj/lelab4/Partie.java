@@ -70,7 +70,7 @@ public class Partie {
         return listNourriture;
     }
 
-    public ArrayList<Cours> getlistCours() {
+    public ArrayList<Cours> getListCours() {
         return listCours;
     }
 

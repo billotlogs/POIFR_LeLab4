@@ -16,6 +16,7 @@ public class Joueur {
 
     ArrayList<Evenement> listEventDormir, listEventTravail;
 
+    Temps temps;
     int energie, santeMentale, faim, connaissance;
     double argent;
 
@@ -26,6 +27,7 @@ public class Joueur {
 
         rnd = new Random();
 
+        this.temps = temps;
         this.energie = energie;
         this.santeMentale = santeMentale;
         this.faim = faim;
@@ -62,7 +64,6 @@ public class Joueur {
         listEventTravail.add(laveVaisselle);
     }
 
-    //**************************************************************************************
     private Evenement EvenementRandom(ArrayList<Evenement> listEvent){
         Evenement evenement = listEvent.get(rnd.nextInt(listEvent.size()));
         return evenement;
@@ -79,8 +80,11 @@ public class Joueur {
     }
 
     public void Dormir(){
-        Evenement evenement = EvenementRandom(listEventDormir);
         energie = 100;
+
+        temps.AvancerHeure(0, 8, 0);
+
+        Evenement evenement = EvenementRandom(listEventDormir);
         evenement.EffectuerEvent(this);
     }
 
@@ -90,10 +94,14 @@ public class Joueur {
 
     public boolean Travailler(int heure){
         if((energie - 10 * heure >= 0) && (faim - 5 * heure >= 0)){
-            Evenement evenement = EvenementRandom(listEventTravail);
             faim -= 5 * heure;
             energie -= 10 * heure;
             argent += 11.25 * heure;
+
+            temps.AvancerHeure(0, heure, 0);
+
+            Evenement evenement = EvenementRandom(listEventTravail);
+            evenement.EffectuerEvent(this);
             return true;
         }
         else
@@ -109,6 +117,8 @@ public class Joueur {
             faim -= cours.getCoutFaim();
             energie -= cours.getCoutEnergie();
             santeMentale -= cours.getCoutSante();
+
+            temps.AvancerHeure(0, cours.dureeHeure, 0);
             return true;
         }
         else

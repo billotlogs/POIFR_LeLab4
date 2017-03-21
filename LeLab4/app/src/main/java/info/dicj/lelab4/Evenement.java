@@ -44,6 +44,7 @@ public class Evenement {
             joueur.argent += modifArgent;
             joueur.faim += modifFaim;
             joueur.energie += modifEnergie;
+            Log.i("Test", text);
         }
     }
     
@@ -52,7 +53,9 @@ public class Evenement {
         int chance = rnd.nextInt(101);
         if(chance < chanceSucces)
             return true;
-        else
+        else {
+            Log.i("test", "chance : " + chance);
             return false;
+        }
     }
 }

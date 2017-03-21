@@ -27,7 +27,7 @@ import java.util.zip.Inflater;
  */
 public class MainActivity extends AppCompatActivity{
     Temps temps = new Temps(1, 6, 30, "Lundi");
-    Partie partie = new Partie(1, 6, 30, "Lundi");
+    Partie partie = new Partie();
     Joueur joueur = new Joueur(100, 100, 100, 0, 200, temps);
 
     ListView lvNourriture;
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
     BouffeAdapter bouffeAdapter;
     CoursAdapter coursAdapter;
 
-    int nbHeure = 3;
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
     TextView txtHeure, txtNbJour, txtJourSemaine;
 
@@ -85,10 +84,11 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.travailler:
                 OuvreFerme(menuHeure);
+                txtNbHeure.setText("3");
                 break;
             case R.id.dormir:
                 joueur.Dormir();
-                UpdateTemps(0, 8, 0);
+                UpdateElementsTemporels();
                 UpdateText();
                 break;
             case R.id.attendre:
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity{
                 Cours coursChoisi = partie.getListCours().get(i);
 
                 if(joueur.AssisterCours(coursChoisi)){
-                    UpdateTemps(0, coursChoisi.dureeHeure, 0);
+                    UpdateElementsTemporels();
                     UpdateText();
                 }
             }
@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity{
 
     //Permet de choisir le nombre d'heures travaillées.
     public void HeureTravail(View view){
+        int nbHeure = 3;
+
         switch (view.getId()){
             case R.id.increase:
                 if(nbHeure < 8)
@@ -142,9 +144,9 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.valider:
                 if(joueur.Travailler(nbHeure)){
-                    UpdateTemps(0, nbHeure, 0);
+                    UpdateElementsTemporels();
+                    UpdateText();
                 }
-                UpdateText();
                 break;
         }
         txtNbHeure.setText("" + nbHeure);
@@ -168,9 +170,9 @@ public class MainActivity extends AppCompatActivity{
         txtArgent.setText("" + joueur.getArgent());
         txtEnergie.setText("" + joueur.getEnergie() + "%");
         txtSante.setText("" + joueur.getSanteMentale() + "%");
-        txtHeure.setText("" + partie.getHeure() + "h" + partie.getMinute());
-        txtJourSemaine.setText("" + partie.getJourSemaine());
-        txtNbJour.setText("Jour " + partie.getJour());
+        txtHeure.setText("" + temps.getHeure() + "h" + temps.getMinute());
+        txtJourSemaine.setText("" + temps.getJourSemaine());
+        txtNbJour.setText("Jour " + temps.getJour());
 
         progressSante.setProgress(joueur.getSanteMentale());
         progressFaim.setProgress(joueur.getFaim());
@@ -199,8 +201,9 @@ public class MainActivity extends AppCompatActivity{
     }
 
     //Met à jour tous les éléments qui sont changeable selon le temps.
-    private void UpdateTemps(int jour, int heure, int minute){
-        if(partie.AvancerHeure(jour, heure, minute)){
+    private void UpdateElementsTemporels(){
+        if(temps.nouveauJour){
+            partie.ChangeDevoirJour(temps.jourSemaine);
             coursAdapter.notifyDataSetChanged();
             AjusterListView(lvCours);
         }

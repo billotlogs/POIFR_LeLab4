@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Temps {
     String jourSemaine;
     int jour, heure, minute;
+    boolean nouveauJour;
 
     public Temps(int jour, int heure, int minute, String jourSemaine) {
         this.jour = jour;
@@ -27,6 +28,10 @@ public class Temps {
 
     public int getJour() {
         return jour;
+    }
+
+    public boolean getNouveauJour(){
+        return nouveauJour;
     }
 
     public String getJourSemaine() {
@@ -54,10 +59,13 @@ public class Temps {
 
         if(jourActuel != this.jour){
             ChangeJourSemaine();
+            nouveauJour = true;
             return true;
         }
-        else
+        else{
+            nouveauJour = false;
             return false;
+        }
     }
 
     //Décide du nom du jour de la semaine et change les cours du jour.

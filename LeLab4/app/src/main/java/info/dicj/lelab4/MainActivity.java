@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity{
 
     ProgressBar progressFaim, progressSante, progressEnergie;
 
+    int nbHeure = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity{
                 joueur.Dormir();
                 UpdateElementsTemporels();
                 UpdateText();
+                AfficherEvenement();
                 break;
             case R.id.attendre:
                 //event.ChanceRealisation(90);
@@ -100,6 +103,9 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.assisterCours:
                 OuvreFerme(menuCours);
+                break;
+            case R.id.btnFermer:
+                OuvreFerme(menuHeure);
                 break;
         }
     }
@@ -131,8 +137,6 @@ public class MainActivity extends AppCompatActivity{
 
     //Permet de choisir le nombre d'heures travaillées.
     public void HeureTravail(View view){
-        int nbHeure = 3;
-
         switch (view.getId()){
             case R.id.increase:
                 if(nbHeure < 8)
@@ -146,13 +150,18 @@ public class MainActivity extends AppCompatActivity{
                 if(joueur.Travailler(nbHeure)){
                     UpdateElementsTemporels();
                     UpdateText();
+                    AfficherEvenement();
                 }
                 break;
         }
         txtNbHeure.setText("" + nbHeure);
     }
 
-
+    //Affiche le text de l'événement.
+    private void AfficherEvenement(){
+        if(joueur.getEvent() != null)
+            Toast.makeText(MainActivity.this, joueur.getEvent().getText(), Toast.LENGTH_SHORT).show();
+    }
 
     //Ouvre ou ferme un menu d'actions
     private void OuvreFerme(View menu){

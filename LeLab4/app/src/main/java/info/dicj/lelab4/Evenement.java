@@ -38,14 +38,16 @@ public class Evenement {
     }
 
     //Modifie les statistiques selon l'événement et montre un texte.
-    public void EffectuerEvent(Joueur joueur){
+    public boolean EffectuerEvent(Joueur joueur){
         if(ChanceRealisation()){
             joueur.santeMentale += modifSanteMentale;
             joueur.argent += modifArgent;
             joueur.faim += modifFaim;
             joueur.energie += modifEnergie;
-            Log.i("Test", text);
+            return true;
         }
+        else
+            return false;
     }
     
     //Détermine la chance en pourcentage qu'une action se réalise.
@@ -53,9 +55,7 @@ public class Evenement {
         int chance = rnd.nextInt(101);
         if(chance < chanceSucces)
             return true;
-        else {
-            Log.i("test", "chance : " + chance);
+        else
             return false;
-        }
     }
 }

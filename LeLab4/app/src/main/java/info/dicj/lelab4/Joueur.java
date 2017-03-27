@@ -1,5 +1,6 @@
 package info.dicj.lelab4;
 
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class Joueur {
 
     ArrayList<Evenement> listEventDormir, listEventTravail;
 
+    Evenement event;
     Temps temps;
     int energie, santeMentale, faim, connaissance;
     double argent;
@@ -33,6 +35,10 @@ public class Joueur {
         this.faim = faim;
         this.connaissance = connaissance;
         this.argent = argent;
+    }
+
+    public Evenement getEvent(){
+        return event;
     }
 
     public int getEnergie() {
@@ -64,9 +70,12 @@ public class Joueur {
         listEventTravail.add(laveVaisselle);
     }
 
-    private Evenement EvenementRandom(ArrayList<Evenement> listEvent){
-        Evenement evenement = listEvent.get(rnd.nextInt(listEvent.size()));
-        return evenement;
+    //Sélectionne un événement aléatoire à partir d'une liste d'événement.
+    private void EvenementRandom(ArrayList<Evenement> listEvent){
+        event = listEvent.get(rnd.nextInt(listEvent.size()));
+
+        if(!event.EffectuerEvent(this))
+            event = null;
     }
 
     public void Manger(Nourriture bouffe){
@@ -79,19 +88,20 @@ public class Joueur {
             faim = 100;
     }
 
+    //Permet au joueur de récupérer de l'énergie.
     public void Dormir(){
         energie = 100;
 
         temps.AvancerHeure(0, 8, 0);
 
-        Evenement evenement = EvenementRandom(listEventDormir);
-        evenement.EffectuerEvent(this);
+        EvenementRandom(listEventDormir);
     }
 
     public void FaireDevoir(){
 
     }
 
+    //Permet au joueur de gagner de l'argent au dépend de certains stats.
     public boolean Travailler(int heure){
         if((energie - 10 * heure >= 0) && (faim - 5 * heure >= 0)){
             faim -= 5 * heure;
@@ -100,8 +110,7 @@ public class Joueur {
 
             temps.AvancerHeure(0, heure, 0);
 
-            Evenement evenement = EvenementRandom(listEventTravail);
-            evenement.EffectuerEvent(this);
+            EvenementRandom(listEventTravail);
             return true;
         }
         else
@@ -112,12 +121,12 @@ public class Joueur {
 
     }
 
+    //Permet au joueur d'assister à un cours.
     public boolean AssisterCours(Cours cours){
         if((energie - cours.getCoutEnergie() >= 0) && (faim - cours.getCoutFaim() >= 0) && (santeMentale - cours.getCoutSante() >= 0)){
             faim -= cours.getCoutFaim();
             energie -= cours.getCoutEnergie();
             santeMentale -= cours.getCoutSante();
-
             temps.AvancerHeure(0, cours.dureeHeure, 0);
             return true;
         }

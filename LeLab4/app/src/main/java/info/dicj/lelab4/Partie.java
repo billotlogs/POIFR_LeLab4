@@ -21,8 +21,8 @@ public class Partie {
     Cours os = new Cours("OS", 3, 5, 5, 5);
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
-    ArrayList<Devoir> listDevoirs;
-    Devoir lab4 = new Devoir("Lab 4", 0, 10);
+    ArrayList<Devoir> listDevoirsBD;
+    Devoir lab4 = new Devoir("Lab 4", 0, 10, 2, bd);
 
     public Partie(){
         listCours = new ArrayList<Cours>();
@@ -35,8 +35,8 @@ public class Partie {
         listNourriture.add(pfk);
         listNourriture.add(dep);
 
-        listDevoirs = new ArrayList<Devoir>();
-        listDevoirs.add(lab4);
+        listDevoirsBD = new ArrayList<Devoir>();
+        listDevoirsBD.add(lab4);
     }
 
     public ArrayList<Nourriture> getListNourriture() {
@@ -47,10 +47,14 @@ public class Partie {
         return listCours;
     }
 
+    public ArrayList<Devoir> getListDevoirsBD(){
+        return listDevoirsBD;
+    }
+
 
 
     //Change les cours du jour.
-    public void ChangeDevoirJour(String jourSemaine){
+    public void ChangeCoursJour(String jourSemaine){
         listCours.clear();
 
         switch(jourSemaine){
@@ -77,6 +81,10 @@ public class Partie {
                 listCours.add(math);
                 break;
         }
+    }
+
+    public void NouveauDevoir(){
+
     }
 
     //Sauvegarde la partie en cours.

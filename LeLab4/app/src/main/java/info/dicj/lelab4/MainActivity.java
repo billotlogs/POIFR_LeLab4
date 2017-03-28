@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity{
         View menuManger = findViewById(R.id.menuManger);
         View menuHeure = findViewById(R.id.menuHeure);
         View menuCours = findViewById(R.id.menuCours);
-        //View menuDevoir = findViewById(R.id.devoir);
+        View menuDevoir = findViewById(R.id.menuDevoir);
 
         switch(view.getId()){
             case R.id.manger:
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
                 //UpdateText();
                 break;
             case R.id.devoir:
-                //OuvreFerme(menuDevoir);
+                OuvreFerme(menuDevoir);
                 break;
             case R.id.assisterCours:
                 OuvreFerme(menuCours);
@@ -128,6 +128,11 @@ public class MainActivity extends AppCompatActivity{
                 Cours coursChoisi = partie.getListCours().get(i);
 
                 if(joueur.AssisterCours(coursChoisi)){
+                    for (Devoir devoir : partie.getListDevoirsBD()) {
+                        if((devoir.getCours() == coursChoisi) && (temps.getJour() == devoir.getJourAttribution())){
+                            partie.getListDevoirsBD().add(devoir);
+                        }
+                    }
                     UpdateElementsTemporels();
                     UpdateText();
                 }
@@ -212,7 +217,7 @@ public class MainActivity extends AppCompatActivity{
     //Met à jour tous les éléments qui sont changeable selon le temps.
     private void UpdateElementsTemporels(){
         if(temps.nouveauJour){
-            partie.ChangeDevoirJour(temps.jourSemaine);
+            partie.ChangeCoursJour(temps.jourSemaine);
             coursAdapter.notifyDataSetChanged();
             AjusterListView(lvCours);
         }

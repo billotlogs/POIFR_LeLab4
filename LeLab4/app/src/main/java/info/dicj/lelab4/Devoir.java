@@ -13,6 +13,7 @@ public class Devoir {
         this.progression = progression;
         this.tempsRequis = tempsRequis;
         this.jourAttribution = jourAttribution;
+        this.cours = cours;
     }
 
     public String getNom() {
@@ -28,7 +29,7 @@ public class Devoir {
     }
 
     public int getJourAttribution(){
-        return tempsRequis;
+        return jourAttribution;
     }
 
     public Cours getCours(){

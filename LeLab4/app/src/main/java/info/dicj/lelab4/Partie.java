@@ -22,7 +22,7 @@ public class Partie {
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
     ArrayList<Devoir> listDevoirsBD;
-    Devoir lab4 = new Devoir("Lab 4", 0, 10, 2, bd);
+    Devoir lab4 = new Devoir("Lab 4", 0, 10, 3, bd);
 
     public Partie(){
         listCours = new ArrayList<Cours>();

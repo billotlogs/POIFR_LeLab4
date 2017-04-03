@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.travailler:
                 OuvreFerme(menuHeure);
-                txtNbHeure.setText("3");
+                txtNbHeure.setText("" + nbHeure);
                 break;
             case R.id.dormir:
                 joueur.Dormir();
@@ -219,6 +219,7 @@ public class MainActivity extends AppCompatActivity{
         if(temps.nouveauJour){
             partie.ChangeCoursJour(temps.jourSemaine);
             coursAdapter.notifyDataSetChanged();
+
             AjusterListView(lvCours);
         }
     }

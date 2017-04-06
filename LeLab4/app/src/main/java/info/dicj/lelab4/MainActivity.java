@@ -32,8 +32,10 @@ public class MainActivity extends AppCompatActivity{
 
     ListView lvNourriture;
     ListView lvCours;
+    ListView lvDevoirs;
     BouffeAdapter bouffeAdapter;
     CoursAdapter coursAdapter;
+    DevoirAdapter devoirAdapter;
 
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
     TextView txtHeure, txtNbJour, txtJourSemaine;
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity{
         lvCours = (ListView)findViewById(R.id.menuCours);
         coursAdapter = new CoursAdapter(this, partie.getListCours());
         lvCours.setAdapter(coursAdapter);
+
+        lvDevoirs = (ListView)findViewById(R.id.menuDevoir);
+        devoirAdapter = new DevoirAdapter(this, partie.getListDevoirsActif());
+        lvDevoirs.setAdapter(devoirAdapter);
 
         txtFaim = (TextView)findViewById(R.id.txtFaim);
         txtArgent = (TextView)findViewById(R.id.txtArgent);
@@ -95,8 +101,7 @@ public class MainActivity extends AppCompatActivity{
                 AfficherEvenement();
                 break;
             case R.id.attendre:
-                //event.ChanceRealisation(90);
-                //UpdateText();
+
                 break;
             case R.id.devoir:
                 OuvreFerme(menuDevoir);
@@ -130,9 +135,11 @@ public class MainActivity extends AppCompatActivity{
                 if(joueur.AssisterCours(coursChoisi)){
                     for (Devoir devoir : partie.getListDevoirsBD()) {
                         if((devoir.getCours() == coursChoisi) && (temps.getJour() == devoir.getJourAttribution())){
-                            partie.getListDevoirsBD().add(devoir);
+                            partie.getListDevoirsActif().add(devoir);
                         }
                     }
+
+                    AjusterListView(lvDevoirs, partie.getListDevoirsActif());
                     UpdateElementsTemporels();
                     UpdateText();
                 }
@@ -220,17 +227,17 @@ public class MainActivity extends AppCompatActivity{
             partie.ChangeCoursJour(temps.jourSemaine);
             coursAdapter.notifyDataSetChanged();
 
-            AjusterListView(lvCours);
+            AjusterListView(lvCours, partie.getListCours());
         }
     }
 
     //Ajuste le Height du ListView selon le nombre d'élément à l'intérieur.
-    private void AjusterListView(ListView lv){
+    private void AjusterListView(ListView lv, ArrayList list){
         ViewGroup.LayoutParams params = lv.getLayoutParams();
         float hauteurItem = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
         int height = 0;
 
-        for(int i = 0; i < coursAdapter.getCount(); i++){
+        for(int i = 0; i < list.size(); i++){
             height += hauteurItem + lv.getDividerHeight();
         }
 

@@ -22,6 +22,7 @@ public class Partie {
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
     ArrayList<Devoir> listDevoirsBD;
+    ArrayList<Devoir> listDevoirsActif;
     Devoir lab4 = new Devoir("Lab 4", 0, 10, 3, bd);
 
     public Partie(){
@@ -34,6 +35,8 @@ public class Partie {
         listNourriture.add(ramen);
         listNourriture.add(pfk);
         listNourriture.add(dep);
+
+        listDevoirsActif = new ArrayList<Devoir>();
 
         listDevoirsBD = new ArrayList<Devoir>();
         listDevoirsBD.add(lab4);
@@ -49,6 +52,10 @@ public class Partie {
 
     public ArrayList<Devoir> getListDevoirsBD(){
         return listDevoirsBD;
+    }
+
+    public ArrayList<Devoir> getListDevoirsActif(){
+        return listDevoirsActif;
     }
 
 

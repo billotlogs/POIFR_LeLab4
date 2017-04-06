@@ -194,7 +194,7 @@
                 style="@style/BoutonListe"/>
 
             <ListView
-                android:layout_height="188dip"
+                android:layout_height="0dip"
                 android:layout_width="match_parent"
                 android:id="@+id/menuDevoir"
                 android:visibility="gone">

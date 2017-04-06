@@ -9,14 +9,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/texture4"
+        android:background="@drawable/texture6"
         android:columnCount="2"
         android:layout_marginBottom="2dip">
 
-        <info.dicj.lelab4.NewFontTextView
-            style="@style/titreSousMenus"
-            android:text="Nom"
-            android:id="@+id/txtNomCours" />
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:weightSum="3">
+
+            <info.dicj.lelab4.NewFontTextView
+                style="@style/titreSousMenus"
+                android:text="NomDevoir"
+                android:id="@+id/txtNomDevoir"
+                android:layout_weight="1.2" />
+
+            <info.dicj.lelab4.NewFontTextView
+                style="@style/titreSousMenus"
+                android:text="NomCours"
+                android:id="@+id/txtNomCours"
+                android:textSize="20sp"
+                android:layout_weight="2"
+                android:textAlignment="viewStart"/>
+        </TableLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,17 +41,12 @@
 
             <com.github.lzyzsd.circleprogress.DonutProgress
                 android:layout_width="60dip"
-                android:layout_height="60dip"
-                app:donut_suffix_text="%"
-                app:donut_progress="40"/>
-
-            <ImageView
-                style="@style/iconeSousMenus"
-                android:src="@drawable/energie"/>
-            <TextView
-                style="@style/textIconeSousMenus.Jaune"
-                android:text="@string/energie"
-                android:id="@+id/txtCoutEnergie"/>
+                android:layout_height="match_parent"
+                app:donut_progress="40"
+                app:donut_text_color="#FFF"
+                app:donut_text_size="13sp"
+                app:donut_unfinished_stroke_width="5dip"
+                android:id="@+id/completionDevoir"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

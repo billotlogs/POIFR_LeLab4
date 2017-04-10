@@ -22,7 +22,8 @@
                 style="@style/titreSousMenus"
                 android:text="NomDevoir"
                 android:id="@+id/txtNomDevoir"
-                android:layout_weight="1.2" />
+                android:layout_weight="1.2"
+                android:textAlignment="viewStart"/>
 
             <info.dicj.lelab4.NewFontTextView
                 style="@style/titreSousMenus"
@@ -45,7 +46,8 @@
                 app:donut_progress="40"
                 app:donut_text_color="#FFF"
                 app:donut_text_size="13sp"
-                app:donut_unfinished_stroke_width="5dip"
+                app:donut_unfinished_stroke_width="4dip"
+                app:donut_finished_stroke_width="7dip"
                 android:id="@+id/completionDevoir"/>
         </LinearLayout>
     </RelativeLayout>

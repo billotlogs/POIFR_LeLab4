@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.lzyzsd.circleprogress.DonutProgress;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -30,9 +32,7 @@ public class MainActivity extends AppCompatActivity{
     Partie partie = new Partie();
     Joueur joueur = new Joueur(100, 100, 100, 0, 200, temps);
 
-    ListView lvNourriture;
-    ListView lvCours;
-    ListView lvDevoirs;
+    ListView lvNourriture, lvCours, lvDevoirs;
     BouffeAdapter bouffeAdapter;
     CoursAdapter coursAdapter;
     DevoirAdapter devoirAdapter;
@@ -40,9 +40,15 @@ public class MainActivity extends AppCompatActivity{
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
     TextView txtHeure, txtNbJour, txtJourSemaine;
 
+    TextView txtNomDevoir, txtMenuHeure_HeureSuivante, txtMenuHeure_coutEnergie, txtMenuHeure_coutFaim, txtMenuHeure_coutSante;
+    DonutProgress progressDevoir;
+
     ProgressBar progressFaim, progressSante, progressEnergie;
 
-    int nbHeure = 3;
+    Devoir devoirSelectionne = null;
+    int nbHeure = 1, progression;
+    boolean menuHeureDevoirActif = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,13 @@ public class MainActivity extends AppCompatActivity{
         progressFaim = (ProgressBar)findViewById(R.id.progressFaim);
         progressSante = (ProgressBar)findViewById(R.id.progressSante);
 
+        progressDevoir = (DonutProgress)findViewById(R.id.progressionDevoir);
+        txtNomDevoir = (TextView)findViewById(R.id.menuHeureNomDevoir);
+        txtMenuHeure_HeureSuivante = (TextView)findViewById(R.id.menuHeure_HeureSuivante);
+        txtMenuHeure_coutEnergie = (TextView)findViewById(R.id.menuHeure_coutEnergie);
+        txtMenuHeure_coutFaim = (TextView)findViewById(R.id.menuHeure_coutFaim);
+        txtMenuHeure_coutSante = (TextView)findViewById(R.id.menuHeure_coutSante);
+
         UpdateText();
         Action();
         ScrollFocus();
@@ -82,7 +95,7 @@ public class MainActivity extends AppCompatActivity{
     //Défini quel menu d'action doit ouvrir lors d'un click sur un bouton du scrollview.
     public void OuvreMenuAction(View view) {
         View menuManger = findViewById(R.id.menuManger);
-        View menuHeure = findViewById(R.id.menuHeure);
+        View menuHeureTravail = findViewById(R.id.menuHeure);
         View menuCours = findViewById(R.id.menuCours);
         View menuDevoir = findViewById(R.id.menuDevoir);
 
@@ -91,7 +104,9 @@ public class MainActivity extends AppCompatActivity{
                 OuvreFerme(menuManger);
                 break;
             case R.id.travailler:
-                OuvreFerme(menuHeure);
+                nbHeure = 3;
+                menuHeureDevoirActif = false;
+                OuvreFerme(menuHeureTravail);
                 txtNbHeure.setText("" + nbHeure);
                 break;
             case R.id.dormir:
@@ -110,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                 OuvreFerme(menuCours);
                 break;
             case R.id.btnFermer:
-                OuvreFerme(menuHeure);
+                OuvreFerme(menuHeureTravail);
                 break;
         }
     }
@@ -131,13 +146,18 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Cours coursChoisi = partie.getListCours().get(i);
+                Devoir devoirRecu = null;
 
                 if(joueur.AssisterCours(coursChoisi)){
-                    for (Devoir devoir : partie.getListDevoirsBD()) {
+                    for (Devoir devoir : partie.getListDevoirs()) {
                         if((devoir.getCours() == coursChoisi) && (temps.getJour() == devoir.getJourAttribution())){
                             partie.getListDevoirsActif().add(devoir);
+                            devoirRecu = devoir;
                         }
                     }
+
+                    if(devoirRecu != null)
+                        partie.getListDevoirs().remove(devoirRecu);
 
                     AjusterListView(lvDevoirs, partie.getListDevoirsActif());
                     UpdateElementsTemporels();
@@ -145,10 +165,35 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+
+        //Choix du devoir.
+        lvDevoirs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                devoirSelectionne = partie.getListDevoirsActif().get(i);
+
+                progressDevoir.setDonut_progress(devoirSelectionne.getProgression());
+
+                menuHeureDevoirActif = true;
+                nbHeure = 1;
+                UpdateElementsMenuHeure();
+                txtNomDevoir.setText(devoirSelectionne.getNom());
+                OuvreFerme(findViewById(R.id.menuHeure));
+            }
+        });
     }
 
     //Permet de choisir le nombre d'heures travaillées.
-    public void HeureTravail(View view){
+    public void SelectionHeure(View view){
+        if(menuHeureDevoirActif){
+            heureDevoir(view);
+        }
+        else {
+            heureTravail(view);
+        }
+    }
+
+    private void heureTravail(View view){
         switch (view.getId()){
             case R.id.increase:
                 if(nbHeure < 8)
@@ -166,7 +211,34 @@ public class MainActivity extends AppCompatActivity{
                 }
                 break;
         }
+
         txtNbHeure.setText("" + nbHeure);
+    }
+
+    private void heureDevoir(View view){
+        switch (view.getId()){
+            case R.id.increase:
+                if(nbHeure < 9){
+                    nbHeure++;
+                }
+                break;
+            case R.id.decrease:
+                if(nbHeure > 1){
+                    nbHeure--;
+                }
+                break;
+            case R.id.valider:
+                if(joueur.FaireDevoir(devoirSelectionne, nbHeure)){
+                    UpdateElementsTemporels();
+                    UpdateText();
+                    AfficherEvenement();
+                    devoirAdapter.notifyDataSetChanged();
+                }
+                RetirerDevoirTermine();
+                break;
+        }
+
+        UpdateElementsMenuHeure();
     }
 
     //Affiche le text de l'événement.
@@ -198,6 +270,28 @@ public class MainActivity extends AppCompatActivity{
         progressSante.setProgress(joueur.getSanteMentale());
         progressFaim.setProgress(joueur.getFaim());
         progressEnergie.setProgress(joueur.getEnergie());
+    }
+
+    private void RetirerDevoirTermine(){
+        if(partie.VerifierDevoirTermine(devoirSelectionne)){
+            Toast.makeText(this, "Devoir terminé", Toast.LENGTH_SHORT).show();
+            OuvreFerme(findViewById(R.id.menuHeure));
+            AjusterListView(lvDevoirs, partie.getListDevoirsActif());
+        }
+    }
+
+    private void UpdateElementsMenuHeure(){
+        progression = ((nbHeure * 100) / devoirSelectionne.getTempsRequis()) + Integer.parseInt(devoirSelectionne.getProgression());
+
+        if(progression > 100)
+            progression = 100;
+
+        progressDevoir.setDonut_progress("" + progression);
+        txtNbHeure.setText("" + nbHeure);
+        txtMenuHeure_coutEnergie.setText(joueur.getEnergie() + " --► " + (joueur.getEnergie() - (devoirSelectionne.getCoutEnergie() * nbHeure)));
+        txtMenuHeure_coutFaim.setText(joueur.getFaim() + " --► " + (joueur.getFaim() - (devoirSelectionne.getCoutFaim() * nbHeure)));
+        txtMenuHeure_coutSante.setText(joueur.getSanteMentale() + " --► " + (joueur.getSanteMentale() - (devoirSelectionne.getCoutSante() * nbHeure)));
+        txtMenuHeure_HeureSuivante.setText(temps.getHeure() + "h" + temps.getMinute() + "  --►  " + (temps.getHeure() + nbHeure) + "h" + temps.getMinute());//Bug d'heure
     }
 
     //Permet aux sous menus d'être scrollable.

@@ -1,6 +1,9 @@
 package info.dicj.lelab4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by utilisateur on 30/01/2017.
@@ -21,9 +24,11 @@ public class Partie {
     Cours os = new Cours("OS", 3, 5, 5, 5);
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
-    ArrayList<Devoir> listDevoirsBD;
-    ArrayList<Devoir> listDevoirsActif;
-    Devoir lab4 = new Devoir("Lab 4", 0, 10, 3, bd);
+    ArrayList<Devoir> listDevoirs, listDevoirsActif, listDevoirsFini;
+    Devoir lab4 = new Devoir("Lab 4", "0", 15, 10, bd, 5, 3, 5);
+    Devoir RPG = new Devoir("RPG", "0", 10, 1, prog, 5, 2, 5);
+    Devoir poeme = new Devoir("Rédaction d'un Poème", "0", 3, 8, francais, 5, 1, 5);
+    Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5);
 
     public Partie(){
         listCours = new ArrayList<Cours>();
@@ -37,9 +42,8 @@ public class Partie {
         listNourriture.add(dep);
 
         listDevoirsActif = new ArrayList<Devoir>();
-
-        listDevoirsBD = new ArrayList<Devoir>();
-        listDevoirsBD.add(lab4);
+        listDevoirsFini = new ArrayList<Devoir>();
+        listDevoirs = new ArrayList<Devoir>(Arrays.asList(new Devoir[]{lab4, RPG, poeme, site}));
     }
 
     public ArrayList<Nourriture> getListNourriture() {
@@ -50,12 +54,16 @@ public class Partie {
         return listCours;
     }
 
-    public ArrayList<Devoir> getListDevoirsBD(){
-        return listDevoirsBD;
+    public ArrayList<Devoir> getListDevoirs(){
+        return listDevoirs;
     }
 
     public ArrayList<Devoir> getListDevoirsActif(){
         return listDevoirsActif;
+    }
+
+    public ArrayList<Devoir> getListDevoirsFini(){
+        return listDevoirsFini;
     }
 
 
@@ -90,8 +98,14 @@ public class Partie {
         }
     }
 
-    public void NouveauDevoir(){
-
+    public boolean VerifierDevoirTermine(Devoir devoir){
+        if(Integer.parseInt(devoir.getProgression()) >= 100){
+            listDevoirsFini.add(devoir);
+            listDevoirsActif.remove(devoir);
+            return true;
+        }
+        else
+            return false;
     }
 
     //Sauvegarde la partie en cours.

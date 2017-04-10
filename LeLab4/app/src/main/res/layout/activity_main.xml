@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFF"
     tools:context="info.dicj.lelab4.MainActivity">
 
@@ -227,90 +228,6 @@
         </TableLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/menuHeure"
-        android:visibility="gone"
-        android:clickable="true"
-        android:background="#af000000">
+    <include layout="@layout/menu_heure"/>
 
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:rowCount="3"
-            android:columnCount="2"
-            android:background="#c8000000"
-            android:padding="10dip"
-            android:layout_gravity="center">
-
-            <ImageButton
-                android:layout_width="60dip"
-                android:layout_height="60dip"
-                android:src="@drawable/increase"
-                android:background="#00a25c5c"
-                android:scaleType="fitCenter"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:onClick="HeureTravail"
-                android:id="@+id/increase" />
-
-            <ImageButton
-                android:layout_width="60dip"
-                android:layout_height="60dip"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity="end"
-                android:padding="5dip"
-                android:scaleType="fitCenter"
-                android:background="@drawable/style_bouton_quitter"
-                android:src="@drawable/quitter"
-                android:onClick="OuvreMenuAction"
-                android:id="@+id/btnFermer"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/heure"
-                android:textSize="100sp"
-                android:textColor="#FFF"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:id="@+id/nbHeure"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/heures"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:textColor="#FFF"/>
-
-            <ImageButton
-                android:layout_width="60dip"
-                android:layout_height="60dip"
-                android:src="@drawable/decrease"
-                android:background="#00a25c5c"
-                android:scaleType="fitCenter"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:onClick="HeureTravail"
-                android:id="@+id/decrease"/>
-
-            <ImageButton
-                android:layout_width="60dip"
-                android:layout_height="60dip"
-                android:padding="5dip"
-                android:src="@drawable/valider"
-                android:background="@drawable/style_bouton_valider"
-                android:scaleType="fitCenter"
-                android:layout_row="2"
-                android:layout_column="1"
-                android:layout_gravity="end"
-                android:onClick="HeureTravail"
-                android:id="@+id/valider"/>
-        </GridLayout>
-    </FrameLayout>
 </RelativeLayout>

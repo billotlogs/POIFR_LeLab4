@@ -97,8 +97,20 @@ public class Joueur {
         EvenementRandom(listEventDormir);
     }
 
-    public void FaireDevoir(){
+    public boolean FaireDevoir(Devoir devoir, int heure){
+        int progression = ((heure * 100) / devoir.getTempsRequis()) + Integer.parseInt(devoir.getProgression());
 
+        energie -= devoir.getCoutEnergie() * heure;
+        faim -= devoir.getCoutFaim() * heure;
+        santeMentale -= devoir.getCoutSante() * heure;
+
+        if(progression >= 100)
+            progression = 100;
+
+        devoir.setProgression("" + progression);
+
+        temps.AvancerHeure(0, heure, 0);
+        return true;
     }
 
     //Permet au joueur de gagner de l'argent au dépend de certains stats.

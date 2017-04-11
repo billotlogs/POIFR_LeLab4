@@ -25,10 +25,10 @@ public class Partie {
     Cours anglais = new Cours("Anglais", 3, 5, 5, 5);
 
     ArrayList<Devoir> listDevoirs, listDevoirsActif, listDevoirsFini;
-    Devoir lab4 = new Devoir("Lab 4", "0", 15, 10, bd, 5, 3, 5);
-    Devoir RPG = new Devoir("RPG", "0", 10, 1, prog, 5, 2, 5);
-    Devoir poeme = new Devoir("Rédaction d'un Poème", "0", 3, 8, francais, 5, 1, 5);
-    Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5);
+    Devoir lab4 = new Devoir("Lab 4", "0", 15, 10, bd, 5, 3, 5, 20);
+    Devoir RPG = new Devoir("RPG", "0", 10, 1, prog, 5, 2, 5, 7);
+    Devoir poeme = new Devoir("Rédaction d'un Poème", "0", 3, 8, francais, 5, 1, 5, 2);
+    Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5, 4);
 
     public Partie(){
         listCours = new ArrayList<Cours>();

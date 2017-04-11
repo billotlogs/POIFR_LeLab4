@@ -19,10 +19,12 @@ public class Joueur {
 
     Evenement event;
     Temps temps;
-    int energie, santeMentale, faim, connaissance;
+    int energie, santeMentale, faim,
+    connaissanceProg, connaissanceFrancais, connaissancePhilo, connaissanceBD, connaissanceAndroid,
+    connaissanceAnglais, connaissanceMath, connaissanceOS;
     double argent;
 
-    public Joueur(int energie, int santeMentale, int faim, int connaissance, double argent, Temps temps){
+    public Joueur(int energie, int santeMentale, int faim, double argent, Temps temps){
         listEventDormir = new ArrayList<Evenement>();
         listEventTravail = new ArrayList<Evenement>();
         CreerEvenement();
@@ -33,8 +35,16 @@ public class Joueur {
         this.energie = energie;
         this.santeMentale = santeMentale;
         this.faim = faim;
-        this.connaissance = connaissance;
         this.argent = argent;
+
+        connaissanceProg = 0;
+        connaissanceFrancais = 0;
+        connaissancePhilo = 0;
+        connaissanceBD = 0;
+        connaissanceAndroid = 0;
+        connaissanceAnglais = 0;
+        connaissanceMath = 0;
+        connaissanceOS = 0;
     }
 
     public Evenement getEvent(){
@@ -53,15 +63,43 @@ public class Joueur {
         return faim;
     }
 
-    public int getConnaissance() {
-        return connaissance;
+    public int getConnaissanceProg() {
+        return connaissanceProg;
+    }
+
+    public int getConnaissanceFrancais() {
+        return connaissanceFrancais;
+    }
+
+    public int getConnaissancePhilo() {
+        return connaissancePhilo;
+    }
+
+    public int getConnaissanceBD() {
+        return connaissanceBD;
+    }
+
+    public int getConnaissanceAndroid() {
+        return connaissanceAndroid;
+    }
+
+    public int getConnaissanceAnglais() {
+        return connaissanceAnglais;
+    }
+
+    public int getConnaissanceOS() {
+        return connaissanceOS;
+    }
+
+    public int getConnaissanceMath() {
+        return connaissanceMath;
     }
 
     public double getArgent() {
         return argent;
     }
 
-
+    //Initialisation des événements et insertion de ceux-ci dans les listes d'événements.
     private void CreerEvenement(){
         Evenement cauchemar = new Evenement("Cauchemar", "Vous rêvez du Lab4", 50, -10, -10, 0, 0);
         listEventDormir.add(cauchemar);
@@ -78,6 +116,7 @@ public class Joueur {
             event = null;
     }
 
+    //Augmente la faim du joueur et réduit son argent.
     public void Manger(Nourriture bouffe){
         if((argent >= bouffe.prix) && (faim < 100)){
             argent -= bouffe.prix;
@@ -97,6 +136,7 @@ public class Joueur {
         EvenementRandom(listEventDormir);
     }
 
+    //Permet au joueur de progresser dans un devoir.
     public boolean FaireDevoir(Devoir devoir, int heure){
         int progression = ((heure * 100) / devoir.getTempsRequis()) + Integer.parseInt(devoir.getProgression());
 
@@ -104,13 +144,38 @@ public class Joueur {
         faim -= devoir.getCoutFaim() * heure;
         santeMentale -= devoir.getCoutSante() * heure;
 
-        if(progression >= 100)
-            progression = 100;
+        CompletionDevoir(devoir.getCours().getNom(), devoir.getGainConnaissance(), progression);
 
         devoir.setProgression("" + progression);
 
         temps.AvancerHeure(0, heure, 0);
         return true;
+    }
+
+    //Augmente la connaissance d'une certaine matière lors de la complétion d'un devoir.
+    private void CompletionDevoir(String nomCours, int gainConnaissance, int progression){
+        if(progression >= 100){
+            progression = 100;
+
+            switch (nomCours){
+                case "Programmation": connaissanceProg += gainConnaissance;
+                    break;
+                case "Français": connaissanceFrancais += gainConnaissance;
+                    break;
+                case "Android": connaissanceAndroid += gainConnaissance;
+                    break;
+                case "Math": connaissanceMath += gainConnaissance;
+                    break;
+                case "Philosophie": connaissancePhilo += gainConnaissance;
+                    break;
+                case "BD": connaissanceBD += gainConnaissance;
+                    break;
+                case "OS": connaissanceOS += gainConnaissance;
+                    break;
+                case "Anglais": connaissanceAnglais += gainConnaissance;
+                    break;
+            }
+        }
     }
 
     //Permet au joueur de gagner de l'argent au dépend de certains stats.

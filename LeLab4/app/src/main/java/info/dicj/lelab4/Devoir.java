@@ -5,10 +5,10 @@ package info.dicj.lelab4;
  */
 public class Devoir {
     String nom, progression;
-    int tempsRequis, jourAttribution, coutEnergie, coutSante, coutFaim;;
+    int tempsRequis, jourAttribution, coutEnergie, coutSante, coutFaim, gainConnaissance;
     Cours cours;
 
-    public Devoir(String nom, String progression, int tempsRequis, int jourAttribution, Cours cours, int coutEnergie, int coutSante, int coutFaim){
+    public Devoir(String nom, String progression, int tempsRequis, int jourAttribution, Cours cours, int coutEnergie, int coutSante, int coutFaim, int gainConnaissance){
         this.nom = nom;
         this.progression = progression;
         this.tempsRequis = tempsRequis;
@@ -17,6 +17,7 @@ public class Devoir {
         this.coutEnergie = coutEnergie;
         this.coutSante = coutSante;
         this.coutFaim = coutFaim;
+        this.gainConnaissance = gainConnaissance;
     }
 
     public String getNom() {
@@ -57,5 +58,9 @@ public class Devoir {
 
     public int getCoutFaim() {
         return coutFaim;
+    }
+
+    public int getGainConnaissance() {
+        return gainConnaissance;
     }
 }

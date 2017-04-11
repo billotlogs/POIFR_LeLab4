@@ -30,7 +30,7 @@ import java.util.zip.Inflater;
 public class MainActivity extends AppCompatActivity{
     Temps temps = new Temps(1, 6, 30, "Lundi");
     Partie partie = new Partie();
-    Joueur joueur = new Joueur(100, 100, 100, 0, 200, temps);
+    Joueur joueur = new Joueur(100, 100, 100, 200, temps);
 
     ListView lvNourriture, lvCours, lvDevoirs;
     BouffeAdapter bouffeAdapter;

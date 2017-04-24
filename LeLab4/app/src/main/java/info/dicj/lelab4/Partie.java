@@ -30,6 +30,9 @@ public class Partie {
     Devoir poeme = new Devoir("Rédaction d'un Poème", "0", 3, 8, francais, 5, 1, 5, 2);
     Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5, 4);
 
+    ArrayList<Examen> listExamen;
+    Examen examProg1 = new Examen("Examen1", 100, prog);
+
     public Partie(){
         listCours = new ArrayList<Cours>();
         listCours.add(prog);
@@ -44,6 +47,8 @@ public class Partie {
         listDevoirsActif = new ArrayList<Devoir>();
         listDevoirsFini = new ArrayList<Devoir>();
         listDevoirs = new ArrayList<Devoir>(Arrays.asList(new Devoir[]{lab4, RPG, poeme, site}));
+
+        listExamen = new ArrayList<Examen>(Arrays.asList(new Examen[]{examProg1}));
     }
 
     public ArrayList<Nourriture> getListNourriture() {
@@ -64,6 +69,10 @@ public class Partie {
 
     public ArrayList<Devoir> getListDevoirsFini(){
         return listDevoirsFini;
+    }
+
+    public ArrayList<Examen> getListExamen(){
+        return listExamen;
     }
 
 
@@ -98,6 +107,7 @@ public class Partie {
         }
     }
 
+    //Enlève le devoir de la liste si celui-ci est termnié.
     public boolean VerifierDevoirTermine(Devoir devoir){
         if(Integer.parseInt(devoir.getProgression()) >= 100){
             listDevoirsFini.add(devoir);

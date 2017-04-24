@@ -154,6 +154,12 @@ public class MainActivity extends AppCompatActivity{
                             partie.getListDevoirsActif().add(devoir);
                             devoirRecu = devoir;
                         }
+
+                    for (Examen examen : partie.getListExamen()){
+                        if((examen.getCours() == coursChoisi) && (examen.getJourAttribution() == temps.getJour())){
+                            
+                        }
+                    }
                     }
 
                     if(devoirRecu != null)
@@ -193,6 +199,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //Choisi le nombre d'heures travaillées.
     private void heureTravail(View view){
         switch (view.getId()){
             case R.id.increase:
@@ -215,6 +222,7 @@ public class MainActivity extends AppCompatActivity{
         txtNbHeure.setText("" + nbHeure);
     }
 
+    //Choisi le nombre d'heures de devoirs.
     private void heureDevoir(View view){
         switch (view.getId()){
             case R.id.increase:
@@ -272,6 +280,7 @@ public class MainActivity extends AppCompatActivity{
         progressEnergie.setProgress(joueur.getEnergie());
     }
 
+    //Retire le devoir de la listView une fois terminé.
     private void RetirerDevoirTermine(){
         if(partie.VerifierDevoirTermine(devoirSelectionne)){
             Toast.makeText(this, "Devoir terminé", Toast.LENGTH_SHORT).show();
@@ -280,6 +289,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    //Met à jour les éléments du menuHeure.
     private void UpdateElementsMenuHeure(){
         progression = ((nbHeure * 100) / devoirSelectionne.getTempsRequis()) + Integer.parseInt(devoirSelectionne.getProgression());
 
@@ -337,5 +347,10 @@ public class MainActivity extends AppCompatActivity{
 
         params.height = height;
         lv.setLayoutParams(params);
+    }
+
+    //Gère la fin du jeu.
+    private void FinJeu(){
+        //if(temps.getJour() == 162)
     }
 }

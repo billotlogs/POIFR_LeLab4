@@ -31,7 +31,7 @@ public class Partie {
     Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5, 4);
 
     ArrayList<Examen> listExamen;
-    Examen examProg1 = new Examen("Examen1", 100, prog);
+    Examen examProg1 = new Examen("Examen1", 100, 1,prog);
 
     public Partie(){
         listCours = new ArrayList<Cours>();

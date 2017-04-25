@@ -9,12 +9,12 @@ public class Examen {
     int nbQuestions, jourAttribution, pourcentage;
     Cours cours;
 
-    public Examen(String nom, int nbQuestions, int pourcentage, int jourAttribution, Cours cours){
+    public Examen(String nom, int nbQuestions, int jourAttribution, Cours cours){
         this.nom = nom;
         this.nbQuestions = nbQuestions;
         this.cours = cours;
         this.jourAttribution = jourAttribution;
-        this.pourcentage = pourcentage;
+        this.pourcentage = 0;
     }
 
     public String getNom() {
@@ -35,5 +35,9 @@ public class Examen {
 
     public int getPourcentage(){
         return pourcentage;
+    }
+
+    public void setPourcentage(int pourcentage) {
+        this.pourcentage = pourcentage;
     }
 }

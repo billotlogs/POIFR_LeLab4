@@ -1,6 +1,7 @@
 package info.dicj.lelab4;
 
 import android.content.ClipData;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity{
 
     TextView txtFaim, txtArgent, txtEnergie, txtSante, txtConnaissance, txtNbHeure;
     TextView txtHeure, txtNbJour, txtJourSemaine;
+    TextView txtProgressionExam;
+    ImageView btnExamen;
 
     TextView txtNomDevoir, txtMenuHeure_HeureSuivante, txtMenuHeure_coutEnergie, txtMenuHeure_coutFaim, txtMenuHeure_coutSante;
     DonutProgress progressDevoir;
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
     ProgressBar progressFaim, progressSante, progressEnergie;
 
     Devoir devoirSelectionne = null;
-    int nbHeure = 1, progression;
+    int nbHeure = 1, progressionDevoir, progressionExam;
     boolean menuHeureDevoirActif = false;
 
 
@@ -75,6 +79,9 @@ public class MainActivity extends AppCompatActivity{
         txtHeure = (TextView)findViewById(R.id.txtHeure);
         txtNbJour = (TextView)findViewById(R.id.txtNbJours);
         txtJourSemaine = (TextView)findViewById(R.id.txtJourSemaine);
+        txtProgressionExam = (TextView)findViewById(R.id.txtProgressionExamen);
+
+        btnExamen = (ImageView)findViewById(R.id.btn_examen);
 
         progressEnergie = (ProgressBar)findViewById(R.id.progressEnergie);
         progressFaim = (ProgressBar)findViewById(R.id.progressFaim);
@@ -187,6 +194,24 @@ public class MainActivity extends AppCompatActivity{
                 OuvreFerme(findViewById(R.id.menuHeure));
             }
         });
+
+        //Action lors du click sur le bouton d'examen.
+        btnExamen.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    btnExamen.setImageResource(R.drawable.btn_examen_click);
+                    progressionExam++;
+                    txtProgressionExam.setText("" + progressionExam);
+                }
+
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    btnExamen.setImageResource(R.drawable.btn_examen);
+                }
+                return true;
+            }
+        });
     }
 
     //Permet de choisir le nombre d'heures travaillées.
@@ -291,12 +316,12 @@ public class MainActivity extends AppCompatActivity{
 
     //Met à jour les éléments du menuHeure.
     private void UpdateElementsMenuHeure(){
-        progression = ((nbHeure * 100) / devoirSelectionne.getTempsRequis()) + Integer.parseInt(devoirSelectionne.getProgression());
+        progressionDevoir = ((nbHeure * 100) / devoirSelectionne.getTempsRequis()) + Integer.parseInt(devoirSelectionne.getProgression());
 
-        if(progression > 100)
-            progression = 100;
+        if(progressionDevoir > 100)
+            progressionDevoir = 100;
 
-        progressDevoir.setDonut_progress("" + progression);
+        progressDevoir.setDonut_progress("" + progressionDevoir);
         txtNbHeure.setText("" + nbHeure);
         txtMenuHeure_coutEnergie.setText(joueur.getEnergie() + " --► " + (joueur.getEnergie() - (devoirSelectionne.getCoutEnergie() * nbHeure)));
         txtMenuHeure_coutFaim.setText(joueur.getFaim() + " --► " + (joueur.getFaim() - (devoirSelectionne.getCoutFaim() * nbHeure)));

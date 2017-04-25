@@ -11,4 +11,5 @@
     <string name="jour_semaine">Lundi</string>
     <string name="nom_devoir">Nom Devoir</string>
     <string name="_6h30_10h10">6h30 --► 10h10</string>
+    <string name="pourcentage">%</string>
 </resources>

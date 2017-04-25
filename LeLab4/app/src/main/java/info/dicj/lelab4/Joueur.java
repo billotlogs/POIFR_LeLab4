@@ -152,6 +152,32 @@ public class Joueur {
         return true;
     }
 
+    //Augmente la note lors d'un examen selon le niveau de connaissance dans le cours.
+    public void FaireExamen(Examen exam){
+        int connaissance = 0;
+
+        switch(exam.getCours().getNom()){
+            case "Programmation": connaissance = connaissanceProg;
+                break;
+            case "Français": connaissance = connaissanceFrancais;
+                break;
+            case "Android": connaissance = connaissanceAndroid;
+                break;
+            case "Math": connaissance = connaissanceMath;
+                break;
+            case "Philosophie": connaissance = connaissancePhilo;
+                break;
+            case "BD": connaissance = connaissanceBD;
+                break;
+            case "OS": connaissance = connaissanceOS;
+                break;
+            case "Anglais": connaissance = connaissanceAnglais;
+                break;
+        }
+
+        exam.setPourcentage(exam.getPourcentage() + connaissance);
+    }
+
     //Augmente la connaissance d'une certaine matière lors de la complétion d'un devoir.
     private void CompletionDevoir(String nomCours, int gainConnaissance, int progression){
         if(progression >= 100){

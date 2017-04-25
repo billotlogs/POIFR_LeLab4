@@ -229,5 +229,6 @@
     </android.support.v4.widget.NestedScrollView>
 
     <include layout="@layout/menu_heure"/>
+    <include layout="@layout/layout_examen"/>
 
 </RelativeLayout>

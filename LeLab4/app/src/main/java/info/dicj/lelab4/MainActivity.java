@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity{
     ProgressBar progressFaim, progressSante, progressEnergie;
 
     Devoir devoirSelectionne = null;
+    Examen examEnCours = null;
     int nbHeure = 1, progressionDevoir, progressionExam;
     boolean menuHeureDevoirActif = false;
 
@@ -164,7 +165,8 @@ public class MainActivity extends AppCompatActivity{
 
                     for (Examen examen : partie.getListExamen()){
                         if((examen.getCours() == coursChoisi) && (examen.getJourAttribution() == temps.getJour())){
-                            
+                            OuvreFerme((View)findViewById(R.id.menuExam));
+                            examEnCours = examen;
                         }
                     }
                     }
@@ -202,8 +204,12 @@ public class MainActivity extends AppCompatActivity{
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     btnExamen.setImageResource(R.drawable.btn_examen_click);
-                    progressionExam++;
-                    txtProgressionExam.setText("" + progressionExam);
+                    joueur.FaireExamen(examEnCours);
+
+                    if(partie.VerifierExamenTermine(examEnCours))//Nettoyer les fonctions placer un peu partout dans n'importe quelle classe.
+                        OuvreFerme(findViewById(R.id.menuExam));
+
+                    txtProgressionExam.setText("" + examEnCours.getPourcentage());
                 }
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP){

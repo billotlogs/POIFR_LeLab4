@@ -101,7 +101,7 @@ public class Joueur {
 
     //Initialisation des événements et insertion de ceux-ci dans les listes d'événements.
     private void CreerEvenement(){
-        Evenement cauchemar = new Evenement("Cauchemar", "Vous rêvez du Lab4", 50, -10, -10, 0, 0);
+        Evenement cauchemar = new Evenement("Cauchemar", "Vous rêvez du Lab4", 20, -10, -10, 0, 0);
         listEventDormir.add(cauchemar);
 
         Evenement laveVaisselle = new Evenement("Problème technique", "Le lave vaisselle est brisé, vous devez lavez tout à la main.", 10, -20, -10, -5, 0);
@@ -155,6 +155,7 @@ public class Joueur {
     //Augmente la note lors d'un examen selon le niveau de connaissance dans le cours.
     public void FaireExamen(Examen exam){
         int connaissance = 0;
+        int gain = 0;
 
         switch(exam.getCours().getNom()){
             case "Programmation": connaissance = connaissanceProg;
@@ -175,7 +176,8 @@ public class Joueur {
                 break;
         }
 
-        exam.setPourcentage(exam.getPourcentage() + connaissance);
+        gain = 1 + (connaissance * 100) / exam.getNbQuestions();
+        exam.setPourcentage(exam.getPourcentage() + gain);
     }
 
     //Augmente la connaissance d'une certaine matière lors de la complétion d'un devoir.

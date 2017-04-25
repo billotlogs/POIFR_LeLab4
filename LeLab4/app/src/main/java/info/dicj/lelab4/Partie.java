@@ -31,7 +31,7 @@ public class Partie {
     Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5, 4);
 
     ArrayList<Examen> listExamen;
-    Examen examProg1 = new Examen("Examen1", 100, 1,prog);
+    Examen examProg1 = new Examen("Examen1", 300, 8, prog);
 
     public Partie(){
         listCours = new ArrayList<Cours>();
@@ -112,6 +112,16 @@ public class Partie {
         if(Integer.parseInt(devoir.getProgression()) >= 100){
             listDevoirsFini.add(devoir);
             listDevoirsActif.remove(devoir);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    //Vérifie si l'examen est terminé.
+    public boolean VerifierExamenTermine(Examen examen){
+        if(examen.getPourcentage() >= 100){
+            examen.setPourcentage(100);
             return true;
         }
         else

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/menuHeure"
+        android:visibility="visible"
+        android:clickable="true"
+        android:background="#af000000">
+
+        <RelativeLayout
+            android:layout_width="310dip"
+            android:layout_height="200dip"
+            android:rowCount="6"
+            android:columnCount="6"
+            android:background="#c8000000"
+            android:padding="10dip"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Titre"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:id="@+id/txtMsgBoxTitre"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:text="Contenu"
+                android:textColor="#FFF"
+                android:id="@+id/txtMsgBoxContenu"/>
+
+            <Button
+                android:layout_width="80dip"
+                android:layout_height="40dip"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:text="OK"
+                android:id="@+id/btnMsgBoxOK" />
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

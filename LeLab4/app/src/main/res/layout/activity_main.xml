@@ -186,7 +186,7 @@
                 android:src="@drawable/attendre"
                 android:background="@drawable/attendretitre"
                 android:id="@+id/attendre"
-                style="@style/BoutonListe"/>
+                style="@style/BoutonListe" />
 
             <ImageButton
                 android:src="@drawable/devoir"

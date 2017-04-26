@@ -30,6 +30,7 @@ import java.util.zip.Inflater;
 *   Trouver un moyen de mettre un événement random selon le type d'action.
  */
 public class MainActivity extends AppCompatActivity{
+    MessageBox messageBox;
     Temps temps = new Temps(1, 6, 30, "Lundi");
     Partie partie = new Partie();
     Joueur joueur = new Joueur(100, 100, 100, 200, temps);
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity{
         UpdateText();
         Action();
         ScrollFocus();
+        messageBox = new MessageBox(this);
     }
 
     //Défini quel menu d'action doit ouvrir lors d'un click sur un bouton du scrollview.
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
                 AfficherEvenement();
                 break;
             case R.id.attendre:
-
+                messageBox.Show("Martin", "Bienvenu martin luther");
                 break;
             case R.id.devoir:
                 OuvreFerme(menuDevoir);
@@ -159,6 +161,7 @@ public class MainActivity extends AppCompatActivity{
                 if(joueur.AssisterCours(coursChoisi)){
                     for (Devoir devoir : partie.getListDevoirs()) {
                         if((devoir.getCours() == coursChoisi) && (temps.getJour() == devoir.getJourAttribution())){
+                            messageBox.Show("Nouveau Devoir", "Vous avez obtenu le devoir : " + devoir.getNom() + " en " + devoir.getCours().getNom());
                             partie.getListDevoirsActif().add(devoir);
                             devoirRecu = devoir;
                         }
@@ -204,10 +207,9 @@ public class MainActivity extends AppCompatActivity{
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     btnExamen.setImageResource(R.drawable.btn_examen_click);
-                    joueur.FaireExamen(examEnCours);
-
-                    if(partie.VerifierExamenTermine(examEnCours))//Nettoyer les fonctions placer un peu partout dans n'importe quelle classe.
+                    if(partie.FaireExamen(examEnCours, joueur)){
                         OuvreFerme(findViewById(R.id.menuExam));
+                    }
 
                     txtProgressionExam.setText("" + examEnCours.getPourcentage());
                 }
@@ -283,7 +285,7 @@ public class MainActivity extends AppCompatActivity{
     //Affiche le text de l'événement.
     private void AfficherEvenement(){
         if(joueur.getEvent() != null)
-            Toast.makeText(MainActivity.this, joueur.getEvent().getText(), Toast.LENGTH_SHORT).show();
+            messageBox.Show(joueur.getEvent().getNom(), joueur.getEvent().getText());
     }
 
     //Ouvre ou ferme un menu d'actions
@@ -314,7 +316,8 @@ public class MainActivity extends AppCompatActivity{
     //Retire le devoir de la listView une fois terminé.
     private void RetirerDevoirTermine(){
         if(partie.VerifierDevoirTermine(devoirSelectionne)){
-            Toast.makeText(this, "Devoir terminé", Toast.LENGTH_SHORT).show();
+            messageBox.Show("Devoir Terminé", "Vous avez terminé le devoir : " + devoirSelectionne.getNom() + " et avez obtenu +" +
+            devoirSelectionne.getGainConnaissance() + " de connaissance en " + devoirSelectionne.getCours().getNom());
             OuvreFerme(findViewById(R.id.menuHeure));
             AjusterListView(lvDevoirs, partie.getListDevoirsActif());
         }

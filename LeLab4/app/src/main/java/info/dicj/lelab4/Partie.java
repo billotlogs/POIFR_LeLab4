@@ -118,14 +118,50 @@ public class Partie {
             return false;
     }
 
+    //Augmente la note lors d'un examen selon le niveau de connaissance dans le cours.
+    public boolean FaireExamen(Examen exam, Joueur joueur){
+        int gain = 1;
+
+        gain += (ConnaissanceUtilisee(exam, joueur) * 100) / exam.getNbQuestions();
+        exam.setPourcentage(exam.getPourcentage() + gain);
+
+        return VerifierExamenTermine(exam);
+    }
+
     //Vérifie si l'examen est terminé.
-    public boolean VerifierExamenTermine(Examen examen){
+    private boolean VerifierExamenTermine(Examen examen){
         if(examen.getPourcentage() >= 100){
             examen.setPourcentage(100);
             return true;
         }
         else
             return false;
+    }
+
+    //Détermine la connaissance de quel cours doit être utilisée pour faire l'examen.
+    private int ConnaissanceUtilisee(Examen exam, Joueur joueur){
+        int connaissance = 0;
+
+        switch(exam.getCours().getNom()){
+            case "Programmation": connaissance = joueur.getConnaissanceProg();
+                break;
+            case "Français": connaissance = joueur.getConnaissanceFrancais();
+                break;
+            case "Android": connaissance = joueur.getConnaissanceAndroid();
+                break;
+            case "Math": connaissance = joueur.getConnaissanceMath();
+                break;
+            case "Philosophie": connaissance = joueur.getConnaissancePhilo();
+                break;
+            case "BD": connaissance = joueur.getConnaissanceBD();
+                break;
+            case "OS": connaissance = joueur.getConnaissanceOS();
+                break;
+            case "Anglais": connaissance = joueur.getConnaissanceAnglais();
+                break;
+        }
+
+        return connaissance;
     }
 
     //Sauvegarde la partie en cours.

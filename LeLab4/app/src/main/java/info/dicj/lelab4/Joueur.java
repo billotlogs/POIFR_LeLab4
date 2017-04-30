@@ -117,14 +117,17 @@ public class Joueur {
     }
 
     //Augmente la faim du joueur et réduit son argent.
-    public void Manger(Nourriture bouffe){
+    public boolean Manger(Nourriture bouffe){
         if((argent >= bouffe.prix) && (faim < 100)){
             argent -= bouffe.prix;
             faim += bouffe.alimentation;
+            return true;
         }
 
-        if(faim > 100)
+        if (faim > 100)
             faim = 100;
+
+        return false;
     }
 
     //Permet au joueur de récupérer de l'énergie.

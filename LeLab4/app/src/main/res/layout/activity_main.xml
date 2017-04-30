@@ -78,7 +78,7 @@
                 <ProgressBar
                     style="@style/cutomProgressBar"
                     android:progressDrawable="@drawable/red_progressbar"
-                    android:id="@+id/progressSante"/>
+                    android:id="@+id/progressSante" />
 
                 <TextView
                     style="@style/progressbarIndicator"

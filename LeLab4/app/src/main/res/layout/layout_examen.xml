@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/menuExam"
-        android:visibility="visible"
+        android:visibility="gone"
         android:clickable="true"
         android:background="#af000000">
 
@@ -28,7 +28,8 @@
                 app:donut_show_text="false"
                 app:donut_unfinished_color="#FFF"
                 app:donut_finished_color="#6305c1"
-                app:donut_progress="30"
+                app:donut_max="30000"
+                app:donut_progress="30000"
                 android:layout_centerInParent="true"
                 android:id="@+id/examen_temps_restant"/>
 

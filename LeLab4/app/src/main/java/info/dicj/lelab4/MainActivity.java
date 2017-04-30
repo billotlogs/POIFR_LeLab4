@@ -1,6 +1,9 @@
 package info.dicj.lelab4;
 
+import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.content.ClipData;
+import android.os.CountDownTimer;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,9 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BaseInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,8 +27,12 @@ import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.DonutProgress;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.zip.Inflater;
 
 /*
@@ -31,6 +41,7 @@ import java.util.zip.Inflater;
  */
 public class MainActivity extends AppCompatActivity{
     MessageBox messageBox;
+    AnimatedProgress animatedProgress;
     Temps temps = new Temps(1, 6, 30, "Lundi");
     Partie partie = new Partie();
     Joueur joueur = new Joueur(100, 100, 100, 200, temps);
@@ -46,15 +57,14 @@ public class MainActivity extends AppCompatActivity{
     ImageView btnExamen;
 
     TextView txtNomDevoir, txtMenuHeure_HeureSuivante, txtMenuHeure_coutEnergie, txtMenuHeure_coutFaim, txtMenuHeure_coutSante;
-    DonutProgress progressDevoir;
+    DonutProgress progressDevoir, progressTempsExamen;
 
     ProgressBar progressFaim, progressSante, progressEnergie;
 
     Devoir devoirSelectionne = null;
     Examen examEnCours = null;
-    int nbHeure = 1, progressionDevoir, progressionExam;
+    int nbHeure = 1, progressionDevoir, progressionExam, progressionExamenRestante;
     boolean menuHeureDevoirActif = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +98,50 @@ public class MainActivity extends AppCompatActivity{
         progressEnergie = (ProgressBar)findViewById(R.id.progressEnergie);
         progressFaim = (ProgressBar)findViewById(R.id.progressFaim);
         progressSante = (ProgressBar)findViewById(R.id.progressSante);
+        progressionExamenRestante = 30000;
 
         progressDevoir = (DonutProgress)findViewById(R.id.progressionDevoir);
+        progressTempsExamen = (DonutProgress)findViewById(R.id.examen_temps_restant);
         txtNomDevoir = (TextView)findViewById(R.id.menuHeureNomDevoir);
         txtMenuHeure_HeureSuivante = (TextView)findViewById(R.id.menuHeure_HeureSuivante);
         txtMenuHeure_coutEnergie = (TextView)findViewById(R.id.menuHeure_coutEnergie);
         txtMenuHeure_coutFaim = (TextView)findViewById(R.id.menuHeure_coutFaim);
         txtMenuHeure_coutSante = (TextView)findViewById(R.id.menuHeure_coutSante);
 
+        messageBox = new MessageBox(this);
+
         UpdateText();
         Action();
         ScrollFocus();
-        messageBox = new MessageBox(this);
+    }
+
+    //Met à jour un DonutProgess à l'aide d'une animation
+    private void UpdateProgressAnimation(DonutProgress progressBar, int debut, int fin, int duree){
+        animatedProgress = new AnimatedProgress(progressBar, debut, 0);
+        animatedProgress.setInterpolator(new LinearInterpolator());
+        animatedProgress.setDuration(duree);
+        progressBar.startAnimation(animatedProgress);
+    }
+
+    //Met fin à l'examen lorsque le temps est écoulé.
+    private void TempsExamenEcoule(){
+        animatedProgress.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                messageBox.Show("Examen terminé", "Vous avez terminé l'examen avec une note de " + examEnCours.getPourcentage() + "%");
+                OuvreFerme((View)findViewById(R.id.menuExam));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     //Défini quel menu d'action doit ouvrir lors d'un click sur un bouton du scrollview.
@@ -146,7 +188,12 @@ public class MainActivity extends AppCompatActivity{
         lvNourriture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                joueur.Manger(partie.getListNourriture().get(i));
+                if(!joueur.Manger(partie.getListNourriture().get(i))){
+                    if(joueur.getArgent() < partie.getListNourriture().get(i).getPrix())
+                        messageBox.Show("Pauvreté", "Vous n'avez plus d'argent pour vous nourrir!");
+                    else if(joueur.getFaim() >= 100)
+                        messageBox.Show("Ventre plein", "Vous avez le ventre plein, cessez de manger!");
+                }
                 UpdateText();
             }
         });
@@ -165,13 +212,15 @@ public class MainActivity extends AppCompatActivity{
                             partie.getListDevoirsActif().add(devoir);
                             devoirRecu = devoir;
                         }
+                    }
 
                     for (Examen examen : partie.getListExamen()){
                         if((examen.getCours() == coursChoisi) && (examen.getJourAttribution() == temps.getJour())){
                             OuvreFerme((View)findViewById(R.id.menuExam));
                             examEnCours = examen;
+                            UpdateProgressAnimation(progressTempsExamen, 30000, 0, 30000);
+                            TempsExamenEcoule();
                         }
-                    }
                     }
 
                     if(devoirRecu != null)
@@ -338,7 +387,7 @@ public class MainActivity extends AppCompatActivity{
         txtMenuHeure_HeureSuivante.setText(temps.getHeure() + "h" + temps.getMinute() + "  --►  " + (temps.getHeure() + nbHeure) + "h" + temps.getMinute());//Bug d'heure
     }
 
-    //Permet aux sous menus d'être scrollable.
+    //Permet aux sous menus d'être scrollable (Utile s'il y a plus que 3 éléments).
     private void ScrollFocus(){
         if(lvNourriture.getCount() > 3){
             lvNourriture.setOnTouchListener(new ListView.OnTouchListener() {

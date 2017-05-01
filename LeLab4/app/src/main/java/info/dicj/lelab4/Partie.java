@@ -9,6 +9,8 @@ import java.util.Collections;
  * Created by utilisateur on 30/01/2017.
  */
 public class Partie {
+    int moyenne;
+
     ArrayList<Nourriture> listNourriture;
     Nourriture ramen = new Nourriture("Ramen", 10, 1.39);
     Nourriture pfk = new Nourriture("Méga solo baril", 20, 10.99);
@@ -30,7 +32,7 @@ public class Partie {
     Devoir poeme = new Devoir("Rédaction d'un Poème", "0", 3, 8, francais, 5, 1, 5, 2);
     Devoir site = new Devoir("Site web", "0", 8, 8, android, 5, 1, 5, 4);
 
-    ArrayList<Examen> listExamen;
+    ArrayList<Examen> listExamen, listExamenTermine;
     Examen examProg1 = new Examen("Examen1", 300, 8, prog);
 
     public Partie(){
@@ -49,6 +51,9 @@ public class Partie {
         listDevoirs = new ArrayList<Devoir>(Arrays.asList(new Devoir[]{lab4, RPG, poeme, site}));
 
         listExamen = new ArrayList<Examen>(Arrays.asList(new Examen[]{examProg1}));
+        listExamenTermine = new ArrayList<Examen>();
+
+        int moyenne = 0;
     }
 
     public ArrayList<Nourriture> getListNourriture() {
@@ -75,7 +80,13 @@ public class Partie {
         return listExamen;
     }
 
+    public ArrayList<Examen> getListExamenTermine() {
+        return listExamenTermine;
+    }
 
+    public int getMoyenne() {
+        return moyenne;
+    }
 
     //Change les cours du jour.
     public void ChangeCoursJour(String jourSemaine){
@@ -132,10 +143,20 @@ public class Partie {
     private boolean VerifierExamenTermine(Examen examen){
         if(examen.getPourcentage() >= 100){
             examen.setPourcentage(100);
+            listExamenTermine.add(examen);
+            listExamen.remove(examen);
             return true;
         }
         else
             return false;
+    }
+
+    public int MoyenneExamen(){
+        for (Examen examen:listExamenTermine) {
+            moyenne += examen.getPourcentage();
+        }
+
+        return moyenne;
     }
 
     //Détermine la connaissance de quel cours doit être utilisée pour faire l'examen.

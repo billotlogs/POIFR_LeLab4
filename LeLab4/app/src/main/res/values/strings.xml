@@ -12,4 +12,24 @@
     <string name="nom_devoir">Nom Devoir</string>
     <string name="_6h30_10h10">6h30 --► 10h10</string>
     <string name="pourcentage">%</string>
+    <string name="moyenne_g_n_rale">Moyenne générale</string>
+    <string name="accueilColnet">ACCUEIL - Col.NET Cégep de Jonquière</string>
+    <string name="stats">Stats</string>
+    <string name="bienvenue">Bienvenue !</string>
+    <string name="mes_cours_hiver_2017">Mes cours - Hiver 2017</string>
+    <string name="programmation">Programmation</string>
+    <string name="fran_ais">Français</string>
+    <string name="android">Android</string>
+    <string name="math_matique">Mathématique</string>
+    <string name="philosophie">Philosophie</string>
+    <string name="syst_me_d_exploitation">Système d\'exploitation</string>
+    <string name="base_de_donn_es">Base de données</string>
+    <string name="anglais">Anglais</string>
+    <string name="os">OS</string>
+    <string name="message">Message(s) de l\'administration</string>
+    <string name="calendrier">Calendrier</string>
+    <string name="liste_de_devoirs">Liste de devoirs</string>
+    <string name="stats_colnet">STATISTIQUES - Col.NET Cégep de Jonquière</string>
+    <string name="statistiques_de_base">Statistiques de base</string>
+    <string name="connaissance">Connaissance</string>
 </resources>

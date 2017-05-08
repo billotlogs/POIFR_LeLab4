@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity{
     TextView txtProgressionExam;
     ImageView btnExamen;
 
-    TextView txtNomDevoir, txtMenuHeure_HeureSuivante, txtMenuHeure_coutEnergie, txtMenuHeure_coutFaim, txtMenuHeure_coutSante;
+    TextView txtNomDevoir, txtMenuHeure_HeureSuivante, txtMenuHeure_coutEnergie, txtMenuHeure_coutFaim, txtMenuHeure_coutSante,
+             txtMoyenneGeneral, txtMessageFin;
+
     DonutProgress progressDevoir, progressTempsExamen;
 
     ProgressBar progressFaim, progressSante, progressEnergie;
@@ -467,12 +469,16 @@ public class MainActivity extends AppCompatActivity{
     //Gère la fin du jeu.
     private void FinJeu(){
         if(temps.getJour() == 9){
-            if(partie.MoyenneExamen() >= 60){
-                messageBox.Show("Réussit", "Vous avez réussit votre session. " + partie.getMoyenne());
-            }
-            else{
-                messageBox.Show("Échec", "Vous avez échoué lamentablement.");
-            }
+            setContentView(R.layout.layout_final);
+            txtMoyenneGeneral = (TextView)findViewById(R.id.moyenneGenerale);
+            txtMessageFin = (TextView)findViewById(R.id.txtMessageFin);
+
+            if(partie.MoyenneExamen() >= 60)
+                txtMessageFin.setText("Vous avez réussit votre session. ");
+            else
+                txtMessageFin.setText("Vous avez échoué lamentablement.");
+
+            txtMoyenneGeneral.setText("" + partie.getMoyenne() + "%");
         }
     }
 }

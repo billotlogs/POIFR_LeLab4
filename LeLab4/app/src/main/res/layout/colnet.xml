@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dip"
+        android:background="@drawable/border_accueil_colnet"
+        android:id="@+id/accueil">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accueilColnet"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="130dip"
+        android:layout_height="120dip"
+        android:layout_margin="20dip"
+        android:orientation="vertical"
+        android:layout_below="@id/accueil"
+        android:background="@drawable/border_titre_colnet"
+        android:id="@+id/profil">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bienvenue"
+            android:textColor="#000"
+            android:background="@drawable/border_titre_colnet_bg"
+            android:paddingLeft="5dip"/>
+
+        <Button
+            android:layout_width="95dip"
+            android:layout_height="95dip"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dip"
+            android:text="@string/stats"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="170dip"
+        android:layout_height="120dip"
+        android:layout_toEndOf="@id/profil"
+        android:layout_below="@id/accueil"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/border_titre_colnet"
+        android:id="@+id/ListeCours">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mes_cours_hiver_2017"
+            android:textColor="#000"
+            android:background="@drawable/border_titre_colnet_bg"
+            android:paddingLeft="5dip"
+            android:id="@+id/TitreListeCours"/>
+
+        <LinearLayout
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dip"
+            android:id="@+id/nomCours"
+            android:layout_below="@id/TitreListeCours"
+            android:layout_marginTop="2dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/programmation"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fran_ais"
+                android:textSize="10sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/android"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/math_matique"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/philosophie"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/os"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/base_de_donn_es"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anglais"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_toEndOf="@id/nomCours"
+            android:text="NOTES"
+            android:layout_margin="5dip"
+            android:layout_below="@id/TitreListeCours"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dip"
+        android:layout_below="@id/profil"
+        android:layout_marginStart="20dip"
+        android:layout_marginEnd="20dip"
+        android:background="@drawable/border_titre_colnet"
+        android:orientation="vertical"
+        android:id="@+id/Message">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/message"
+            android:paddingLeft="5dip"
+            android:textColor="#000"
+            android:background="@drawable/border_titre_colnet_bg"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dip">
+            
+            <LinearLayout
+                android:layout_width="60dip"
+                android:layout_height="50dip"
+                android:id="@+id/date"
+                android:background="@drawable/border_titre_colnet"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:background="@drawable/border_titre_colnet_bg"
+                    android:textColor="#000"
+                    android:paddingLeft="5dip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="2015-09-17"
+                    android:textSize="11sp"
+                    android:gravity="center"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dip"
+                android:layout_height="50dip"
+                android:id="@+id/objet"
+                android:layout_toEndOf="@id/date"
+                android:background="@drawable/border_titre_colnet"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Objet"
+                    android:background="@drawable/border_titre_colnet_bg"
+                    android:textColor="#000"
+                    android:paddingLeft="5dip"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="VOUS ÊTES VICTIME OU TÉMOIN DE HARCÈLEMENT OU DE VIOLENCE?"
+                    android:textSize="11sp"
+                    android:gravity="center"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:id="@+id/de"
+                android:layout_toEndOf="@id/objet"
+                android:background="@drawable/border_titre_colnet">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="De"
+                    android:background="@drawable/border_titre_colnet_bg"
+                    android:textColor="#000"
+                    android:paddingLeft="5dip"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dip"
+        android:layout_below="@id/Message"
+        android:layout_margin="20dip"
+        android:background="@drawable/border_titre_colnet"
+        android:orientation="vertical"
+        android:id="@+id/ColnetDevoirs">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/liste_de_devoirs"
+            android:paddingLeft="5dip"
+            android:textColor="#000"
+            android:background="@drawable/border_titre_colnet_bg"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ListeDevoirsColnet">
+
+        </ListView>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:layout_below="@id/ColnetDevoirs"
+        android:layout_marginStart="20dip"
+        android:layout_marginEnd="20dip"
+        android:layout_marginBottom="20dip"
+        android:text="@string/calendrier"/>
+</RelativeLayout>

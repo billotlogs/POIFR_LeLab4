@@ -324,6 +324,12 @@ public class MainActivity extends AppCompatActivity{
                 UpdateText();
                 AfficherEvenement();
                 break;
+            case R.id.vivre:
+                joueur.Vivre();
+                messageBox.Show("Vivre", "Vous vous sentez en vie en faisant une partie de bowling.");
+                UpdateText();
+                UpdateElementsTemporels();
+                break;
             case R.id.attendre:
                 messageBox.Show("Martin", "Bienvenu martin luther");
                 break;
@@ -479,6 +485,15 @@ public class MainActivity extends AppCompatActivity{
                 txtMessageFin.setText("Vous avez échoué lamentablement.");
 
             txtMoyenneGeneral.setText("" + partie.getMoyenne() + "%");
+        }
+
+        if(joueur.santeMentale <= 0){
+            setContentView(R.layout.layout_final);
+            txtMoyenneGeneral = (TextView)findViewById(R.id.txtMoyenneGenerale);
+            txtMessageFin = (TextView)findViewById(R.id.txtMessageFin);
+
+            txtMessageFin.setText("420 Blaze it haha XDxd !!!1!!111");
+            txtMoyenneGeneral.setText("Vous avez abandonné l'école.");
         }
     }
 }

@@ -187,6 +187,7 @@ public class Joueur {
             faim -= 5 * heure;
             energie -= 10 * heure;
             argent += 11.25 * heure;
+            santeMentale -= 3 * heure;
 
             temps.AvancerHeure(0, heure, 0);
 
@@ -198,7 +199,15 @@ public class Joueur {
     }
 
     public void Vivre(){
+        energie -= 15;
+        argent -= 20;
+        santeMentale += 10;
+        faim -= 10;
 
+        if(santeMentale >= 100)
+            santeMentale = 100;
+
+        temps.AvancerHeure(0, 3, 0);
     }
 
     //Permet au joueur d'assister à un cours.

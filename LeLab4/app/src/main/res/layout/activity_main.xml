@@ -215,16 +215,10 @@
             </ListView>
 
             <ImageButton
-                android:src="@drawable/argent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_bouton_valider"/>
-
-            <ImageButton
-                android:src="@drawable/argent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_bouton_valider"/>
+                android:src="@drawable/vivre"
+                android:background="@drawable/titrevivre"
+                android:id="@+id/vivre"
+                style="@style/BoutonListe"/>
         </TableLayout>
     </android.support.v4.widget.NestedScrollView>
 
